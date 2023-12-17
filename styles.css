@@ -1,0 +1,81 @@
+body {
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    font-family: Roboto, sans-serif;
+    margin: 30px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-left: auto; */
+    padding: 0% 40px;
+    border: 2px solid black;
+    background-color: #2B6DBC;
+    color: white;
+  }
+
+li {
+    list-style: none;
+    display: flex;
+
+}
+
+.links-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 50px;
+    padding: 10px 20px;
+    border: 2px solid black;
+}
+
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    border: 2px solid black;
+    background-color: #2B6DBC;
+    color: white;
+}
+
+
+.work {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    /* padding: 10px 20px; */
+    border: 2px solid black;
+}
+
+
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    /* gap: 50px; */
+    /* padding: 10px 20px; */
+    border: 2px solid black;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* margin: 15px; */
+    margin-top: 20px;
+    border: 2px solid black;
+}
