@@ -1,13 +1,14 @@
 body {
     height: 100vh;
     margin: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-family: Roboto, sans-serif;
     margin: 30px;
     border: 2px solid black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
     
 
 
@@ -26,6 +27,16 @@ li {
     list-style: none;
     display: flex;
 
+}
+
+.intro {
+    padding: 200px 50px;
+    border: 2px solid black;
+}
+
+.contact {
+    padding: 200px 50px;
+    border: 2px solid black;
 }
 
 .links-top {
@@ -56,7 +67,7 @@ li {
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    /* padding: 10px 20px; */
+    padding: 10px 50px;
     border: 2px solid black;
 }
 
@@ -86,6 +97,8 @@ li {
     padding: 20px; 
     width: 200px;
     height: 150px; 
+    text-align: center;
+  
 }
 
 
