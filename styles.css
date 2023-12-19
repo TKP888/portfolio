@@ -67,7 +67,7 @@ li {
     align-items: center;
     justify-content: space-evenly;
     /* gap: 50px; */
-    /* padding: 10px 20px; */
+    padding: 10px;
     border: 2px solid black;
 }
 
@@ -79,3 +79,14 @@ li {
     margin-top: 20px;
     border: 2px solid black;
 }
+
+.box1 {
+    border-radius: 25px;
+    background: #2B6DBC;
+    padding: 20px; 
+    width: 200px;
+    height: 150px; 
+}
+
+
+
