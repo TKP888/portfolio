@@ -22,6 +22,15 @@ body {
     color: white;
   }
 
+h1 {
+    font-size: 50px;
+}
+
+p {
+    font-size: 24px;
+
+}
+
 li {
     list-style: none;
     display: flex;
@@ -29,14 +38,14 @@ li {
 }
 
 .intro {
-    padding: 200px 50px;
+    padding: 350px 50px;
     border: 2px solid black;
     background-image: url("images/background/intro.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     color: white;
-    height: 500px; 
+    /* height: 700px;  */
 }
 
 .contact {
@@ -99,8 +108,8 @@ li {
     align-items: center;
     justify-content: space-evenly;
     /* gap: 50px; */
-    padding: 10px;
-    margin-bottom: 50px;
+    padding: 150px;
+    /* margin-bottom: 50px; */
     border: 2px solid black;
 }
 
@@ -120,28 +129,46 @@ li {
 .box1 {
     border-radius: 25px;
     background: #2B6DBC;
-    padding: 20px; 
+    padding: 50px; 
     width: 200px;
-    height: 200px; 
+    /* height: 200px;  */
     text-align: center;
-  
+    margin: 25px;
+    align-items: center;
+    transition: transform .2s;
+    color: white;
+}
+
+.box1:hover {
+    transform: scale(1.2)
 }
 
 
 .github {
- 
+    transition: transform .2s;
     max-width: 80px;
+}
+
+.github:hover {
+    transform: scale(1.2)
 }
 
 .foot-icons {
     height: 30px;
     width: 30px;
+    transition: transform .2s;
+}
+
+.foot-icons:hover {
+    transform: scale(1.5)
 }
 
 .icons {
     height: 80px;
     width: 80px;
+    transition: transform .2s;
 }
 
-
-
+.icons:hover {
+    transform: scale(1.3)
+}
