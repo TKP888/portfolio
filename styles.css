@@ -1,17 +1,16 @@
 body {
     height: 100vh;
+    width: 100%;
     margin: 0;
     /* overflow: hidden; */
     font-family: Roboto, sans-serif;
-    margin: 30px;
-    border: 2px solid black;
+    /* margin: 30px; */
+    /* border: 2px solid black; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     
     
-
-
 .header {
     display: flex;
     justify-content: space-between;
@@ -75,10 +74,24 @@ li {
     justify-content: space-between;
     gap: 8px;
     padding: 20px 50px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    background-color: #2B6DBC;
+    color: white;
     
 }
 
+.button1 {
+    border-radius: 15px;
+    border-color: #17C4D3;
+    background-color: #17C4D3;
+    padding: 10px; 
+    width: 150px;
+    height: 50px; 
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
 
 .projects {
     display: flex;
@@ -87,6 +100,7 @@ li {
     justify-content: space-evenly;
     /* gap: 50px; */
     padding: 10px;
+    margin-bottom: 50px;
     border: 2px solid black;
 }
 
@@ -94,9 +108,13 @@ li {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
     /* margin: 15px; */
-    margin-top: 20px;
-    border: 2px solid black;
+    padding: 50px 50px;
+    /* margin-top: 20px; */
+    /* border: 2px solid black; */
+    background-color: #2B6DBC;
+    color: white;
 }
 
 .box1 {
@@ -110,7 +128,20 @@ li {
 }
 
 
+.github {
+ 
+    max-width: 80px;
+}
+
 .foot-icons {
     height: 30px;
     width: 30px;
 }
+
+.icons {
+    height: 80px;
+    width: 80px;
+}
+
+
+
