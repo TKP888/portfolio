@@ -86,6 +86,21 @@ border-color: green;
     <p>Get in touch!</p>
     <form action="/my-handling-form-page" method="post">
         <p>Required fields are followed by <span aria-label="required">*</span>.</p>
+
+        <legend>
+          Which service do you require?<span aria-label="required">*</span>
+        </legend>
+        <input type="radio" required name="service" id="dev" value="dev" checked /><label
+          for="dev"
+          >Development</label
+        >
+        <input type="radio" required name="service" id="video" value="video" /><label
+          for="video"
+          >Film</label
+        >
+      </fieldset>
+
+
         <ul>
             <li>
                 <!-- <label for="name">Name:</label>
