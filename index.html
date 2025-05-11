@@ -1,66 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Antony Petsas | Full Stack Developer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page wrapper">
+      <!-- Header Section -->
+      <header class="header">
+        <div class="containerheader">
+          <h1 class="site-title">Antony Petsas</h1>
+          <button class="menu-toggle" aria-label="Open menu">&#9776;</button>
 
-<div class="header">
-    <h1>Antony Petsas</h1>
-    <ul class="links-top">
-        <li>Work</li>
-        <li>About</li>
-        <li>Dev Log</li>
-        <li>Contact</li>
-    </ul>
-</div>
+          <nav class="overlay-nav">
+            <button class="close-menu" aria-label="Close menu">&times;</button>
+            <ul class="overlay-links">
+              <li><a href="#work">Work</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#log">Dev Log</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
 
-<div class="intro">
-    <h1>Junior Full Stack Developer</h1>
-    <p>I'm a self-taught full stack web developer with a passion for building interactive websites using HTML5, CSS and JavaScript.</p>
-    <!-- <img class="profile" src="images/photo/profile_photo.jpg" alt="photo of Antony Petsas"> -->
-    <button class="button1">Say Hello!</button>
-</div>
+      <!-- Hero / Intro Section -->
+      <section class="intro" id="about">
+        <div class="containerintro">
+          <img
+            class="profile"
+            src="images/photo/Ant 2025 1x1.jpg"
+            alt="Antony Petsas' profile photo"
+          />
+          <div class="container">
+            <h2>Junior Full Stack Developer</h2>
+            <p>
+              I’m a self-taught full stack web developer with a passion for
+              building interactive websites using HTML5, CSS, and JavaScript.
+            </p>
 
-<div class="work">
-    <h2>Recent Projects</h2>
-    <a href="https://github.com/TKP888" target="_blank">
-        <img class="github" src="icons/GitHub-Logos/GitHub_Logo_White.png" alt="github logo">
-    </a>
-</div>
+            <!-- Uncomment and update path when ready -->
 
-<div class="projects">
-    <div class="box1"><div>Project 1</div></div>
-    <div class="box1"><div>Project 2</div></div>
-    <div class="box1"><div>Project 3</div></div>
-    <div class="box1"><div>Project 4</div></div>
-</div>
+            <button class="button1" aria-label="Say Hello">Say Hello!</button>
+          </div>
+        </div>
+      </section>
 
-<div class="skills">
-    <h2>Skills</h2>
-    <img class="icons" src="icons/skills-logos/html5.png">
-    <img class="icons" src="icons/skills-logos/css3.png">
-    <img class="icons" src="icons/skills-logos/javascript.png">
-    <img class="icons" src="icons/skills-logos/vscode-alt.png">
-</div>
+      <!-- Work Section -->
+      <section class="work" id="work">
+        <div class="containerproj">
+          <h2>Recent Projects</h2>
+          <a
+            href="https://github.com/TKP888"
+            target="_blank"
+            aria-label="View my GitHub profile"
+          >
+            <img
+              class="github-logo"
+              src="icons/GitHub-Logos/GitHub_Logo_White.png"
+              alt="GitHub logo"
+            />
+          </a>
+        </div>
+      </section>
 
-<div class="contact">
-    <h3>Like what you see? Let's chat</h3>
-    <p>Find out more about my services and what I can do for you.</p>
-    <button class="button1">Contact</button>
-</div>
+      <!-- Projects Grid -->
+      <div class="projects">
+        <section class="project-card project-card--one">Project 1</section>
+        <section class="project-card project-card--two">Project 2</section>
+        <section class="project-card project-card--three">Project 3</section>
+        <section class="project-card project-card--four">Project 4</section>
+      </div>
 
-<div class="footer">
-    Copyright © Antony Petsas 2023
-    <a href="https://github.com/TKP888" target="_blank">
-        <img class="foot-icons" src="./icons/github-mark/github-mark-white.svg" alt="github logo">
-    </a>
-    <a href="https://www.linkedin.com/in/akpetsas" target="_blank">
-        <img class="foot-icons" src="icons/LinkedIn-Logos/linkedin-li-white.png" alt="linkedin logo">
-    </a>
-</div>
+      <!-- Contact Section -->
+      <section class="contact" id="contact">
+        <div class="container">
+          <h3>Like what you see? Let's chat</h3>
+          <p>Find out more about my services and what I can do for you.</p>
+          <button class="button1" aria-label="Contact me">Contact</button>
+        </div>
+      </section>
 
-</body>
+      <!-- Footer Section -->
+      <footer class="footer">
+        <div class="container footer-flex">
+          <p class="footer-text">&copy; Antony Petsas 2023</p>
+          <div class="social-links">
+            <a
+              href="https://github.com/TKP888"
+              target="_blank"
+              aria-label="GitHub profile"
+            >
+              <img
+                class="foot-icon"
+                src="./icons/github-mark/github-mark-white.svg"
+                alt="GitHub logo"
+              />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/akpetsas"
+              target="_blank"
+              aria-label="LinkedIn profile"
+            >
+              <img
+                class="foot-icon"
+                src="icons/LinkedIn-Logos/linkedin-li-white.png"
+                alt="LinkedIn logo"
+              />
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script>
+    const toggleButton = document.querySelector(".menu-toggle");
+    const closeButton = document.querySelector(".close-menu");
+    const overlayNav = document.querySelector(".overlay-nav");
+
+    toggleButton.addEventListener("click", () => {
+      overlayNav.classList.add("active");
+    });
+
+    closeButton.addEventListener("click", () => {
+      overlayNav.classList.remove("active");
+    });
+  </script>
 </html>
