@@ -154,39 +154,7 @@ function initScrollAnimations() {
   });
 }
 
-// Timeline scroll animations
-function initTimelineAnimations() {
-  const timelineItems = document.querySelectorAll(".timeline-item");
-
-  const timelineObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
-
-          // Add a subtle highlight effect to the current timeline item
-          timelineItems.forEach((item) => item.classList.remove("active"));
-          entry.target.classList.add("active");
-        }
-      });
-    },
-    {
-      threshold: 0.4,
-      rootMargin: "0px 0px -30% 0px",
-    }
-  );
-
-  timelineItems.forEach((item) => {
-    item.style.opacity = "0";
-    item.style.transform = "translateY(30px)";
-    item.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-    timelineObserver.observe(item);
-  });
-}
-
 // Initialize scroll animations when the page loads
 document.addEventListener("DOMContentLoaded", () => {
   initScrollAnimations();
-  initTimelineAnimations();
 });
