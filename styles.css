@@ -230,7 +230,7 @@ nav {
 .intro {
   padding: 60px 0 60px 0; /* Reduced padding since we have page wrapper padding */
   position: relative;
-  background-image: url("images/12_Colorful_Ink_Flow_Backgrounds_source_1387507/Flow\ Ink\ \(10\).jpg");
+  background-image: url("images/background/2202-0025_RVFX_2110_ShapeGradientLoopBackgrounds_A03A_Neg_Orange_Purple_F001_STILL.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -389,6 +389,11 @@ nav {
   padding: 1rem;
 }
 
+.project-info {
+  align-items: center;
+  text-align: center;
+}
+
 .project-title {
   font-size: 2.5rem;
   margin: 0;
@@ -407,6 +412,10 @@ nav {
   flex-wrap: wrap;
   gap: 0.8rem;
   margin: 1rem 0;
+}
+
+.tech-stack {
+  justify-content: center;
 }
 
 .tech-tag {
@@ -428,6 +437,10 @@ nav {
   gap: 1.5rem;
   align-items: center;
   margin-top: auto;
+}
+
+.project-links {
+  justify-content: center;
 }
 
 .github-link {
