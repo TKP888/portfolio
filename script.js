@@ -19,6 +19,26 @@ navLinks.forEach((link) => {
   });
 });
 
+// Smooth scrolling for all navigation links (desktop and mobile)
+function addSmoothScrolling() {
+  const allNavLinks = document.querySelectorAll('a[href^="#"]');
+
+  allNavLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute("href");
+      const targetSection = document.querySelector(targetId);
+
+      if (targetSection) {
+        targetSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
+  });
+}
+
 // Contact form functionality
 const showFormButton = document.getElementById("show-form");
 const contactForm = document.getElementById("contact-form");
@@ -119,9 +139,14 @@ contactForm.addEventListener("submit", async (e) => {
 
 // Enhanced scroll animation for intro paragraphs
 function initScrollAnimations() {
+  // Check if device is mobile
+  const isMobile = window.innerWidth <= 768;
+
   const observerOptions = {
-    threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-    rootMargin: "0px 0px -10% 0px",
+    threshold: isMobile
+      ? [0, 0.5, 1]
+      : [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+    rootMargin: isMobile ? "0px 0px -20% 0px" : "0px 0px -10% 0px",
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -157,4 +182,5 @@ function initScrollAnimations() {
 // Initialize scroll animations when the page loads
 document.addEventListener("DOMContentLoaded", () => {
   initScrollAnimations();
+  addSmoothScrolling(); // Initialize smooth scrolling
 });
