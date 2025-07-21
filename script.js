@@ -179,8 +179,121 @@ function initScrollAnimations() {
   });
 }
 
+// Scroll markers functionality
+function initScrollMarkers() {
+  const scrollMarkers = document.querySelectorAll(".scroll-marker");
+  const sections = ["about", "projects", "timeline", "contact"];
+
+  // Function to update active marker based on scroll position
+  function updateActiveMarker() {
+    const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+    // Clear all active markers first
+    scrollMarkers.forEach((marker) => marker.classList.remove("active"));
+
+    // Get all sections and their positions
+    const sectionPositions = [];
+
+    sections.forEach((sectionId, index) => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        let sectionTop, sectionBottom;
+
+        if (sectionId === "about") {
+          // For about section, get the range of all intro sections
+          const introSections = document.querySelectorAll(".intro");
+          if (introSections.length > 0) {
+            sectionTop = introSections[0].offsetTop;
+            sectionBottom =
+              introSections[introSections.length - 1].offsetTop +
+              introSections[introSections.length - 1].offsetHeight;
+          } else {
+            sectionTop = section.offsetTop;
+            sectionBottom = section.offsetTop + section.offsetHeight;
+          }
+        } else {
+          sectionTop = section.offsetTop;
+          sectionBottom = section.offsetTop + section.offsetHeight;
+        }
+
+        sectionPositions.push({
+          index,
+          sectionId,
+          top: sectionTop,
+          bottom: sectionBottom,
+        });
+      }
+    });
+
+    // Find which section the scroll position is in
+    let activeSectionIndex = -1;
+
+    // Check sections in order (first match wins)
+    for (let i = 0; i < sectionPositions.length; i++) {
+      const section = sectionPositions[i];
+      if (scrollPosition >= section.top && scrollPosition < section.bottom) {
+        activeSectionIndex = section.index;
+        break;
+      }
+    }
+
+    // If no section found and we're at the top, activate first section
+    if (activeSectionIndex === -1 && window.scrollY < 200) {
+      activeSectionIndex = 0;
+    }
+
+    // Activate the correct marker
+    if (activeSectionIndex >= 0) {
+      scrollMarkers[activeSectionIndex].classList.add("active");
+      console.log(
+        `Active section: ${sections[activeSectionIndex]}, Scroll position: ${scrollPosition}, Window scroll: ${window.scrollY}`
+      );
+    } else {
+      console.log(
+        `No active section found. Scroll position: ${scrollPosition}, Window scroll: ${window.scrollY}`
+      );
+    }
+  }
+
+  // Add click event listeners to markers
+  scrollMarkers.forEach((marker, index) => {
+    marker.addEventListener("click", () => {
+      const sectionId = sections[index];
+      const section = document.getElementById(sectionId);
+
+      if (section) {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
+  });
+
+  // Throttle function for scroll events
+  function throttle(func, limit) {
+    let inThrottle;
+    return function () {
+      const args = arguments;
+      const context = this;
+      if (!inThrottle) {
+        func.apply(context, args);
+        inThrottle = true;
+        setTimeout(() => (inThrottle = false), limit);
+      }
+    };
+  }
+
+  // Update markers on scroll with throttling
+  window.addEventListener("scroll", throttle(updateActiveMarker, 50));
+
+  // Initial update
+  updateActiveMarker();
+}
+
 // Initialize scroll animations when the page loads
 document.addEventListener("DOMContentLoaded", () => {
   initScrollAnimations();
   addSmoothScrolling(); // Initialize smooth scrolling
+  initScrollMarkers(); // Initialize scroll markers
 });
