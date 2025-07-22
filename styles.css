@@ -99,7 +99,7 @@ body {
   overflow-y: scroll;
   height: 100vh;
   width: 100%;
-  padding-top: 120px;
+  padding-top: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
@@ -183,12 +183,21 @@ p {
 }
 
 .site-title {
-  font-size: 2rem;
-  color: var(--color-text);
+  height: 25px;
+  width: auto;
+  max-width: 100px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  cursor: pointer;
   display: flex;
   align-items: center;
   height: 100%;
   margin: 0;
+}
+
+.site-title:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
 }
 
 /* ========== NAVIGATION ========== */
@@ -304,7 +313,8 @@ nav {
 
 /* ========== INTRO SECTION ========== */
 .intro {
-  padding: 60px 0 60px 0; /* Reduced padding since we have page wrapper padding */
+  padding: 0; /* Remove padding to prevent shifting */
+  margin-top: 0; /* Remove margin to prevent gaps */
   position: relative;
   background-image: url("images/background/2202-0025_RVFX_2110_ShapeGradientLoopBackgrounds_A03A_Neg_Orange_Purple_F001_STILL.webp");
   background-size: cover;
@@ -314,14 +324,25 @@ nav {
   color: var(--color-text);
   text-align: left;
   width: 100%;
-  height: calc(
-    100vh - 120px
-  ); /* Subtract header padding from viewport height */
-  overflow: hidden;
+  min-height: 100vh; /* Use min-height to allow content to expand */
+  overflow: visible; /* Allow content to be visible */
   display: flex;
   align-items: center;
   justify-content: center;
   scroll-snap-align: start;
+}
+
+/* Remove margin from all intro sections except the first one */
+.intro:not(:first-of-type) {
+  margin-top: 0;
+}
+
+/* First intro section - no margin, let header overlay */
+.intro:first-of-type {
+  margin-top: 0;
+  min-height: 100vh; /* Full viewport height */
+  padding-top: 0; /* Remove padding to align correctly */
+  padding-bottom: 20px; /* Add bottom padding for breathing room */
 }
 
 /* Add blue overlay with opacity */
@@ -1199,7 +1220,7 @@ textarea:focus {
   }
 
   .page.wrapper {
-    padding-top: 80px; /* Reduced padding for mobile header */
+    padding-top: 0;
   }
 
   .container,
@@ -1230,7 +1251,8 @@ textarea:focus {
   }
 
   .site-title {
-    font-size: 1.8rem;
+    height: 22px;
+    max-width: 80px;
     margin: 0;
     display: flex;
     align-items: center;
@@ -1263,7 +1285,8 @@ textarea:focus {
 
   /* Intro section - matching desktop behavior but optimized for mobile */
   .intro {
-    padding: 60px 0 60px 0;
+    padding: 0;
+    margin-top: 0; /* Remove margin to prevent gaps */
     position: relative;
     background-image: url("images/background/2202-0025_RVFX_2110_ShapeGradientLoopBackgrounds_A03A_Neg_Orange_Purple_F001_STILL.webp");
     background-size: cover;
@@ -1273,12 +1296,25 @@ textarea:focus {
     color: var(--color-text);
     text-align: left;
     width: 100%;
-    height: calc(100vh - 80px);
+    height: 100vh; /* Full viewport height */
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     scroll-snap-align: start;
+  }
+
+  /* Remove margin from all intro sections except the first one */
+  .intro:not(:first-of-type) {
+    margin-top: 0;
+  }
+
+  /* First intro section - no margin, let header overlay */
+  .intro:first-of-type {
+    margin-top: 0;
+    min-height: 100vh; /* Full viewport height */
+    padding-top: 0; /* Remove padding to align correctly */
+    padding-bottom: 15px; /* Add bottom padding for breathing room */
   }
 
   .intro::before {
@@ -1600,7 +1636,8 @@ textarea:focus {
   }
 
   .site-title {
-    font-size: 1.6rem;
+    height: 20px;
+    max-width: 70px;
     height: 100%;
   }
 
@@ -1612,8 +1649,22 @@ textarea:focus {
 
   /* Intro section adjustments */
   .intro {
-    padding: 40px 0;
-    height: calc(100vh - 65px);
+    padding: 0;
+    margin-top: 0; /* Remove margin to prevent gaps */
+    height: 100vh; /* Full viewport height */
+  }
+
+  /* Remove margin from all intro sections except the first one */
+  .intro:not(:first-of-type) {
+    margin-top: 0;
+  }
+
+  /* Add margin only to the first intro section to account for header */
+  .intro:first-of-type {
+    margin-top: 0;
+    min-height: 100vh; /* Full viewport height */
+    padding-top: 0; /* Remove padding to align correctly */
+    padding-bottom: 10px; /* Add bottom padding for breathing room */
   }
 
   .intro .containerintro {
