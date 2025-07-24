@@ -60,7 +60,8 @@
 
 .marker-label {
   color: var(--color-text);
-  font-size: 0.9rem;
+  font-size: 0.7rem;
+
   font-weight: 500;
   white-space: nowrap;
   opacity: 0;
@@ -102,6 +103,7 @@ body {
   padding-top: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  scroll-padding-top: 0;
 }
 
 /* ========== TYPOGRAPHY ========== */
@@ -172,6 +174,12 @@ p {
   box-sizing: border-box;
   display: flex;
   align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0px;
 }
 
 .containerheader {
@@ -364,14 +372,18 @@ nav {
 }
 
 .profile {
-  border-radius: 2000px;
-  max-width: 450px;
+  border-radius: 50%;
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 /* Enhanced Scroll Animation Styles for Intro Paragraphs */
 .intro p {
-  font-size: 2.1rem;
-  line-height: 1.3;
+  font-size: 1.8rem;
+  line-height: 1.4;
   font-weight: 400;
   margin-bottom: 1.5rem;
   opacity: 0;
@@ -379,8 +391,32 @@ nav {
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
+/* Name highlight effect on intro hover */
+.intro p .name-highlight {
+  position: relative;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.intro p .name-highlight::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: #ffae35;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+  z-index: -1;
+}
+
+.intro p:hover .name-highlight::after {
+  width: 100%;
+}
+
 .intro h2 {
-  font-size: 3rem;
+  font-size: 2.8rem;
   line-height: 1.2;
   margin-bottom: 2rem;
 }
@@ -1216,11 +1252,12 @@ textarea:focus {
 /* Mobile Devices (<768px) */
 @media (max-width: 767px) {
   html {
-    font-size: 14px;
+    font-size: 16px; /* Better for mobile readability */
   }
 
   .page.wrapper {
     padding-top: 0;
+    scroll-snap-type: y proximity; /* Better mobile scrolling */
   }
 
   .container,
@@ -1228,20 +1265,21 @@ textarea:focus {
   .containerproj,
   .containerheader,
   .footer-flex {
-    padding: 0 20px;
+    padding: 0 24px; /* Slightly more padding for better touch targets */
     max-width: 100%;
   }
 
   .contact .container {
-    padding: 0 20px;
+    padding: 0 24px;
     max-width: 100%;
   }
 
   /* Header adjustments */
   .header {
-    padding: 15px 0;
-    height: 70px; /* Slightly larger for better touch targets */
+    padding: 12px 0;
+    height: 75px; /* Larger for better touch targets */
     margin: 0;
+    backdrop-filter: blur(15px); /* Enhanced blur for mobile */
   }
 
   .containerheader {
@@ -1251,8 +1289,8 @@ textarea:focus {
   }
 
   .site-title {
-    height: 22px;
-    max-width: 80px;
+    height: 24px;
+    max-width: 85px;
     margin: 0;
     display: flex;
     align-items: center;
@@ -1263,41 +1301,47 @@ textarea:focus {
   .menu-toggle {
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
-    padding: 8px;
+    font-size: 2.2rem;
+    padding: 12px; /* Larger touch target */
     margin: 0;
     height: 100%;
     background: none;
     border: none;
     color: var(--color-text);
     cursor: pointer;
+    min-width: 48px; /* Minimum touch target size */
+    min-height: 48px;
   }
 
   .overlay-links li a {
-    font-size: 1.8rem;
+    font-size: 2rem;
+    padding: 16px 0; /* Better touch targets */
   }
 
   .close-menu {
-    font-size: 2.5rem;
-    top: 20px;
-    right: 25px;
+    font-size: 2.8rem;
+    top: 24px;
+    right: 28px;
+    padding: 12px;
+    min-width: 48px;
+    min-height: 48px;
   }
 
-  /* Intro section - matching desktop behavior but optimized for mobile */
+  /* Intro section - optimized for mobile */
   .intro {
     padding: 0;
-    margin-top: 0; /* Remove margin to prevent gaps */
+    margin-top: 0;
     position: relative;
     background-image: url("images/background/2202-0025_RVFX_2110_ShapeGradientLoopBackgrounds_A03A_Neg_Orange_Purple_F001_STILL.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-attachment: scroll; /* Use scroll for better mobile performance */
+    background-attachment: scroll; /* Better mobile performance */
     color: var(--color-text);
-    text-align: left;
+    text-align: center; /* Center text on mobile */
     width: 100%;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden;
+    min-height: 100vh; /* Use min-height for better content flow */
+    overflow: visible; /* Allow content to be visible */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1312,9 +1356,9 @@ textarea:focus {
   /* First intro section - no margin, let header overlay */
   .intro:first-of-type {
     margin-top: 0;
-    min-height: 100vh; /* Full viewport height */
-    padding-top: 0; /* Remove padding to align correctly */
-    padding-bottom: 15px; /* Add bottom padding for breathing room */
+    min-height: 100vh;
+    padding-top: 0;
+    padding-bottom: 20px; /* More breathing room */
   }
 
   .intro::before {
@@ -1324,7 +1368,12 @@ textarea:focus {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(1, 11, 64, 0.7);
+    background-color: rgba(
+      1,
+      11,
+      64,
+      0.75
+    ); /* Slightly more overlay for better text readability */
     z-index: 1;
   }
 
@@ -1332,50 +1381,56 @@ textarea:focus {
     position: relative;
     z-index: 2;
     flex-direction: column;
-    gap: 30px;
-    padding: 20px;
+    gap: 35px; /* More spacing */
+    padding: 24px;
     text-align: center;
-    max-width: 600px;
+    max-width: 500px; /* Slightly smaller for mobile */
     margin: 0 auto;
   }
 
   .profile {
-    max-width: 200px;
+    max-width: 180px; /* Slightly smaller for mobile */
     width: 100%;
     height: auto;
     margin: 0 auto;
-    border-radius: 2000px;
+    border-radius: 50%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
   }
 
   .intro h2 {
-    font-size: 2.5rem;
-    line-height: 1.2;
+    font-size: 2.8rem; /* Slightly larger for mobile */
+    line-height: 1.1;
     margin-bottom: 1.5rem;
+    font-weight: 600;
   }
 
   .intro p {
-    font-size: 1.4rem;
-    line-height: 1.4;
-    margin-bottom: 1rem;
+    font-size: 1.5rem; /* Larger for better readability */
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    font-weight: 400;
   }
 
   /* Button adjustments */
   .button1 {
     width: auto;
-    min-width: 180px;
-    height: 50px;
-    font-size: 16px;
-    margin: 15px auto;
-    padding: 12px 24px;
+    min-width: 200px; /* Larger touch target */
+    height: 56px; /* Larger for better touch */
+    font-size: 18px; /* Larger font */
+    margin: 20px auto;
+    padding: 16px 32px;
+    border-radius: 20px; /* More rounded */
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(39, 3, 166, 0.3); /* Add shadow */
   }
 
-  /* Project cards - better mobile layout */
+  /* Project cards - optimized mobile layout */
   .project-card {
     width: 100%;
-    padding: 40px 20px;
+    padding: 48px 24px; /* More padding */
     height: auto;
     min-height: 100vh;
     max-width: 100%;
@@ -1383,8 +1438,8 @@ textarea:focus {
 
   .project-content {
     flex-direction: column;
-    padding: 20px;
-    gap: 30px;
+    padding: 24px;
+    gap: 40px; /* More spacing */
     max-width: 100%;
     height: auto;
   }
@@ -1393,116 +1448,140 @@ textarea:focus {
     max-width: 100%;
     height: auto;
     order: 1;
+    display: flex;
+    justify-content: center;
   }
 
   .project-image img {
-    max-height: 40vh;
+    max-height: 45vh; /* Slightly larger */
     width: 100%;
     object-fit: contain;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Add shadow */
   }
 
   .project-info {
     order: 2;
     padding: 0;
-    gap: 20px;
+    gap: 24px; /* More spacing */
   }
 
   .project-title {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
+    font-size: 2.4rem; /* Larger title */
+    margin-bottom: 1.2rem;
+    font-weight: 600;
   }
 
   .project-description {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
+    font-size: 1.2rem; /* Larger text */
+    line-height: 1.6;
+    margin-bottom: 1.8rem;
+    color: var(--color-text-secondary);
   }
 
   .tech-stack {
-    gap: 10px;
-    margin: 1.5rem 0;
+    gap: 12px; /* More spacing */
+    margin: 2rem 0;
+    justify-content: center;
   }
 
   .tech-tag {
-    font-size: 0.9rem;
-    padding: 8px 16px;
+    font-size: 1rem; /* Larger tags */
+    padding: 10px 18px;
+    border-radius: 25px;
+    font-weight: 500;
+    background-color: rgba(39, 3, 166, 0.3); /* Better visibility */
   }
 
   .project-links {
     flex-direction: row;
-    gap: 15px;
+    gap: 20px; /* More spacing */
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 24px;
   }
 
   .demo-link {
     width: auto;
-    min-width: 140px;
+    min-width: 160px; /* Larger touch target */
     text-align: center;
-    padding: 12px 20px;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
   }
 
-  /* Timeline section - better mobile layout */
+  /* Timeline section - optimized mobile layout */
   .timeline-section {
-    padding: 80px 0 60px 0;
+    padding: 100px 0 80px 0; /* More padding */
   }
 
   .timeline-title {
-    font-size: 2.8rem;
-    margin-bottom: 3rem;
-    padding: 0 20px;
+    font-size: 3rem; /* Larger title */
+    margin-bottom: 4rem;
+    padding: 0 24px;
+    font-weight: 600;
   }
 
   .timeline {
-    padding: 0 20px;
+    padding: 0 24px;
   }
 
   .timeline::before {
-    left: 20px;
+    left: 24px; /* Align with padding */
     transform: none;
+    width: 3px; /* Slightly thinner */
   }
 
   .timeline-item {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem; /* More spacing */
   }
 
   .timeline-item:nth-child(odd) .timeline-content,
   .timeline-item:nth-child(even) .timeline-content {
-    margin-left: 50px;
+    margin-left: 60px; /* More space from timeline */
     margin-right: 0;
     text-align: left;
   }
 
   .timeline-dot {
-    left: 20px;
+    left: 24px; /* Align with timeline */
     transform: none;
+    width: 18px; /* Slightly larger */
+    height: 18px;
+    border: 3px solid var(--color-bg-primary);
   }
 
   .timeline-content {
-    padding: 20px;
+    padding: 28px; /* More padding */
     margin: 0;
+    border-radius: 16px; /* More rounded */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
   }
 
   .timeline-role {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.6rem; /* Larger role title */
+    margin-bottom: 0.8rem;
+    font-weight: 600;
   }
 
   .timeline-description {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
+    font-size: 1.1rem; /* Larger description */
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-secondary);
   }
 
   .skill-tag {
-    font-size: 0.85rem;
-    padding: 6px 12px;
-    margin: 2px;
+    font-size: 0.9rem; /* Larger tags */
+    padding: 8px 14px;
+    margin: 3px;
+    border-radius: 20px;
+    font-weight: 500;
   }
 
-  /* Contact section - better mobile layout */
+  /* Contact section - optimized mobile layout */
   .contact {
-    padding: 40px 0;
+    padding: 60px 0; /* More padding */
     width: 100%;
     height: auto;
     min-height: 100vh;
@@ -1512,22 +1591,25 @@ textarea:focus {
   }
 
   #contacttitle {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    margin-bottom: 30px;
-    padding: 0 20px;
+    font-size: 2.8rem; /* Larger title */
+    line-height: 1.1;
+    margin-bottom: 40px; /* More spacing */
+    padding: 0 24px;
+    font-weight: 600;
   }
 
   #contact-form {
-    margin: 20px;
-    width: calc(100% - 40px);
-    max-width: 500px;
-    padding: 30px 20px;
+    margin: 24px;
+    width: calc(100% - 48px);
+    max-width: 520px; /* Slightly larger */
+    padding: 36px 28px; /* More padding */
+    border-radius: 20px; /* More rounded */
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
   }
 
   .form-row {
     flex-direction: column;
-    gap: 20px;
+    gap: 24px; /* More spacing */
     width: 100%;
   }
 
@@ -1535,75 +1617,124 @@ textarea:focus {
     width: 100%;
     min-width: 100%;
     margin: 0;
-    gap: 8px;
+    gap: 10px; /* More spacing */
   }
 
   label {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.1rem; /* Larger labels */
+    font-weight: 600;
     padding: 0;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    color: var(--color-text);
   }
 
   input,
   textarea {
     width: 100%;
-    padding: 15px;
+    padding: 18px; /* Larger padding */
     font-size: 16px;
     margin: 0;
-    border-radius: 8px;
+    border-radius: 12px; /* More rounded */
     border: 2px solid var(--color-accent-1);
+    background-color: rgba(1, 11, 64, 0.3); /* Better contrast */
+    transition: all 0.3s ease;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: var(--color-highlight);
+    box-shadow: 0 0 0 4px rgba(39, 3, 166, 0.2);
+    background-color: rgba(1, 11, 64, 0.5);
   }
 
   textarea {
-    min-height: 120px;
+    min-height: 140px; /* Taller textarea */
     resize: vertical;
   }
 
   #sendmessage {
     width: 100%;
-    margin: 20px 0 0 0;
-    padding: 15px;
-    font-size: 16px;
+    margin: 24px 0 0 0;
+    padding: 18px; /* Larger padding */
+    font-size: 18px; /* Larger font */
+    font-weight: 600;
+    border-radius: 16px; /* More rounded */
+    background-color: var(--color-highlight);
+    border: none;
+    box-shadow: 0 4px 16px rgba(39, 3, 166, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  #sendmessage:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 3, 166, 0.4);
   }
 
   .form-status {
-    font-size: 0.95rem;
-    padding: 10px;
-    margin: 10px 0;
+    font-size: 1rem; /* Larger status text */
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    font-weight: 500;
   }
 
   /* Footer improvements */
   .footer {
-    padding: 20px 0;
+    padding: 32px 0; /* More padding */
     height: auto;
     min-height: auto;
+    background-color: rgba(1, 11, 64, 0.95); /* Enhanced background */
   }
 
   .footer-flex {
     flex-direction: column;
-    gap: 20px;
-    padding: 0 20px;
+    gap: 24px; /* More spacing */
+    padding: 0 24px;
   }
 
   .footer-text {
-    font-size: 1rem;
+    font-size: 1.1rem; /* Larger text */
+    font-weight: 500;
   }
 
   .social-links {
     justify-content: center;
-    gap: 20px;
+    gap: 24px; /* More spacing */
   }
 
   .foot-icon {
-    height: 30px;
-    width: 30px;
+    height: 32px; /* Larger icons */
+    width: 32px;
+    transition: all 0.3s ease;
+    filter: brightness(1.1); /* Slightly brighter */
+  }
+
+  .foot-icon:hover {
+    transform: scale(1.3); /* Larger hover effect */
+    filter: brightness(1.4);
   }
 
   /* Ensure form is scrollable on mobile if needed */
   #contact-form.visible {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    max-height: 80vh; /* Prevent form from being too tall */
+  }
+
+  /* Additional mobile optimizations */
+  .overlay-nav {
+    backdrop-filter: blur(20px); /* Enhanced blur */
+  }
+
+  .overlay-links li {
+    margin: 24px 0; /* More spacing between menu items */
+  }
+
+  /* Better touch feedback */
+  .button1:active,
+  .demo-link:active,
+  .menu-toggle:active {
+    transform: scale(0.95);
   }
 }
 

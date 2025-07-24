@@ -4,6 +4,23 @@ const closeButton = document.querySelector(".close-menu");
 const overlayNav = document.querySelector(".overlay-nav");
 const navLinks = document.querySelectorAll(".overlay-links a");
 
+// Prevent initial scroll snap behavior on page load
+function preventInitialScroll() {
+  // Temporarily disable scroll snap
+  const wrapper = document.querySelector(".page.wrapper");
+  if (wrapper) {
+    wrapper.style.scrollSnapType = "none";
+
+    // Force scroll to top
+    window.scrollTo(0, 0);
+
+    // Re-enable scroll snap after a short delay
+    setTimeout(() => {
+      wrapper.style.scrollSnapType = "y mandatory";
+    }, 100);
+  }
+}
+
 // Logo click functionality - scroll to top
 function initLogoClick() {
   const logo = document.querySelector(".site-title");
@@ -199,124 +216,86 @@ function initScrollAnimations() {
 // Scroll markers functionality
 function initScrollMarkers() {
   const scrollMarkers = document.querySelectorAll(".scroll-marker");
-  const sections = ["about", "projects", "timeline", "contact"];
+
+  // Define sections with their selectors
+  const sections = [
+    { id: "about", selector: ".intro" },
+    { id: "projects", selector: ".projects" },
+    { id: "timeline", selector: "#timeline" },
+    { id: "contact", selector: "#contact" },
+  ];
 
   // Function to update active marker based on scroll position
   function updateActiveMarker() {
-    const scrollPosition = window.scrollY + window.innerHeight / 3;
+    const scrollPosition = window.scrollY + window.innerHeight / 3; // Use 1/3 down the viewport
+    let activeSectionIndex = -1;
 
     // Clear all active markers first
     scrollMarkers.forEach((marker) => marker.classList.remove("active"));
 
-    // Get all sections and their positions
-    const sectionPositions = [];
+    // Check each section
+    sections.forEach((section, index) => {
+      let element;
 
-    sections.forEach((sectionId, index) => {
-      let sectionTop, sectionBottom;
-
-      if (sectionId === "about") {
-        // For about section, get the range of all intro sections
-        const introSections = document.querySelectorAll(".intro");
-        if (introSections.length > 0) {
-          sectionTop = introSections[0].offsetTop;
-          sectionBottom =
-            introSections[introSections.length - 1].offsetTop +
-            introSections[introSections.length - 1].offsetHeight;
-        } else {
-          sectionTop = 0;
-          sectionBottom = 0;
-        }
-      } else if (sectionId === "projects") {
+      if (section.id === "about") {
+        // For about section, get the first intro section
+        element = document.querySelector(".intro");
+      } else if (section.id === "projects") {
         // For projects section, get the projects div
-        const projectsDiv = document.querySelector(".projects");
-        if (projectsDiv) {
-          sectionTop = projectsDiv.offsetTop;
-          sectionBottom = projectsDiv.offsetTop + projectsDiv.offsetHeight;
-        } else {
-          sectionTop = 0;
-          sectionBottom = 0;
-        }
+        element = document.querySelector(".projects");
       } else {
         // For other sections, get by ID
-        const section = document.getElementById(sectionId);
-        if (section) {
-          sectionTop = section.offsetTop;
-          sectionBottom = section.offsetTop + section.offsetHeight;
-        } else {
-          sectionTop = 0;
-          sectionBottom = 0;
+        element = document.getElementById(section.id);
+      }
+
+      if (element) {
+        // Use offsetTop for more reliable positioning
+        const elementTop = element.offsetTop;
+        const elementBottom = elementTop + element.offsetHeight;
+
+        // Debug logging
+        console.log(
+          `Section ${section.id}: top=${elementTop}, bottom=${elementBottom}, scroll=${scrollPosition}`
+        );
+
+        // Check if scroll position is within this section
+        if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
+          activeSectionIndex = index;
+          console.log(`✅ Active section: ${section.id}`);
         }
       }
-
-      sectionPositions.push({
-        index,
-        sectionId,
-        top: sectionTop,
-        bottom: sectionBottom,
-      });
-
-      // Debug logging for each section
-      console.log(
-        `Section ${sectionId}: top=${sectionTop}, bottom=${sectionBottom}`
-      );
     });
 
-    console.log(
-      `Current scroll position: ${scrollPosition}, Window scroll: ${window.scrollY}`
-    );
-
-    // Find which section the scroll position is in
-    let activeSectionIndex = -1;
-
-    // Check sections in order (first match wins)
-    for (let i = 0; i < sectionPositions.length; i++) {
-      const section = sectionPositions[i];
-      console.log(
-        `Checking ${section.sectionId}: ${scrollPosition} >= ${section.top} && ${scrollPosition} < ${section.bottom}`
-      );
-      if (scrollPosition >= section.top && scrollPosition < section.bottom) {
-        activeSectionIndex = section.index;
-        console.log(
-          `Found active section: ${section.sectionId} (index: ${section.index})`
-        );
-        break;
-      }
-    }
-
-    // If no section found and we're at the top, activate first section
+    // If we're at the very top of the page, activate the first section
     if (activeSectionIndex === -1 && window.scrollY < 200) {
       activeSectionIndex = 0;
-      console.log("No section found, activating first section (top of page)");
+      console.log("At top of page, activating first section");
     }
 
     // Activate the correct marker
     if (activeSectionIndex >= 0) {
       scrollMarkers[activeSectionIndex].classList.add("active");
-      console.log(
-        `✅ Active section: ${sections[activeSectionIndex]}, Scroll position: ${scrollPosition}, Window scroll: ${window.scrollY}`
-      );
+      console.log(`🎯 Active marker: ${sections[activeSectionIndex].id}`);
     } else {
-      console.log(
-        `❌ No active section found. Scroll position: ${scrollPosition}, Window scroll: ${window.scrollY}`
-      );
+      console.log("❌ No active section found");
     }
   }
 
   // Add click event listeners to markers
   scrollMarkers.forEach((marker, index) => {
     marker.addEventListener("click", () => {
-      const sectionId = sections[index];
+      const section = sections[index];
       let targetElement;
 
-      if (sectionId === "about") {
+      if (section.id === "about") {
         // Scroll to first intro section
         targetElement = document.querySelector(".intro");
-      } else if (sectionId === "projects") {
+      } else if (section.id === "projects") {
         // Scroll to projects div
         targetElement = document.querySelector(".projects");
       } else {
         // For other sections, get by ID
-        targetElement = document.getElementById(sectionId);
+        targetElement = document.getElementById(section.id);
       }
 
       if (targetElement) {
@@ -345,12 +324,19 @@ function initScrollMarkers() {
   // Update markers on scroll with throttling
   window.addEventListener("scroll", throttle(updateActiveMarker, 50));
 
-  // Initial update
-  updateActiveMarker();
+  // Also update on window resize to handle any layout changes
+  window.addEventListener("resize", throttle(updateActiveMarker, 100));
+
+  // Initial update after a short delay to ensure DOM is ready
+  setTimeout(updateActiveMarker, 100);
+
+  // Force an update after a longer delay to ensure everything is loaded
+  setTimeout(updateActiveMarker, 500);
 }
 
 // Initialize scroll animations when the page loads
 document.addEventListener("DOMContentLoaded", () => {
+  preventInitialScroll(); // Prevent initial scroll snap behavior
   initScrollAnimations();
   addSmoothScrolling(); // Initialize smooth scrolling
   initScrollMarkers(); // Initialize scroll markers
