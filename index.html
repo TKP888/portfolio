@@ -8,35 +8,15 @@
   </head>
   <body>
     <div class="page wrapper">
-      <!-- Scroll Markers -->
-      <div class="scroll-markers">
-        <div class="scroll-marker" data-section="about">
-          <span class="marker-dot"></span>
-          <span class="marker-label">About</span>
-        </div>
-        <div class="scroll-marker" data-section="projects">
-          <span class="marker-dot"></span>
-          <span class="marker-label">Projects</span>
-        </div>
-        <div class="scroll-marker" data-section="timeline">
-          <span class="marker-dot"></span>
-          <span class="marker-label">Experience</span>
-        </div>
-        <div class="scroll-marker" data-section="contact">
-          <span class="marker-dot"></span>
-          <span class="marker-label">Contact</span>
-        </div>
-      </div>
-
       <!-- Header Section -->
       <header class="header">
         <div class="containerheader">
           <div class="logo-container">
-            <img
+            <!-- <img
               src="images/Logo.png"
               alt="Antony Petsas Logo"
               class="site-title"
-            />
+            /> -->
             <h2>Antony Petsas</h2>
           </div>
           <!-- Desktop Navigation -->
@@ -112,7 +92,63 @@
 
       <!-- Projects Grid -->
       <div class="projects" id="projects">
+      
         <section class="project-card project-card--one">
+          <div class="project-content">
+            <div class="project-image">
+              <img
+                src="./images/projects/examples/odinbook example.png"
+                alt="Project 2 screenshot"
+              />
+            </div>
+            <div class="project-info">
+              <h3 class="project-title">Odinbook</h3>
+              <p class="project-description">
+                A social media platform built with Node.js and PostgreSQL,
+                featuring friend management and user interactions. Odinbook is a
+                social networking application that allows users to connect with
+                others through friend requests and messaging. The platform
+                provides an intuitive way for users to discover new people, send
+                friend requests, and manage their social connections.
+              </p>
+              <div class="tech-stack">
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">EJS</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Express.js</span>
+                <span class="tech-tag">Prisma ORM</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Bootstrap</span>
+                <span class="tech-tag">Passport.js</span>
+                <span class="tech-tag">Bcrypt</span>
+              </div>
+              <div class="project-links">
+                <a
+                  href="https://github.com/TKP888/odinbook"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="github-link"
+                  aria-label="View project on GitHub"
+                >
+                  <img
+                    src="./icons/github-mark/github-mark-white.svg"
+                    alt="GitHub logo"
+                    class="project-github-icon"
+                  />
+                </a>
+                <a
+                  href="https://odinbook-production-4ff2.up.railway.app/auth/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="demo-link"
+                >
+                  View Live Demo
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="project-card project-card--two">
           <div class="project-content">
             <div class="project-image">
               <img
@@ -162,39 +198,35 @@
               </div>
             </div>
           </div>
-        </section>
+        <!-- </section>
         <section class="project-card project-card--two">
           <div class="project-content">
             <div class="project-image">
               <img
-                src="./images/projects/examples/odinbook example.png"
-                alt="Project 2 screenshot"
+                src="./images/projects/examples/proj 1 example.png"
+                alt="Project 1 screenshot"
               />
             </div>
             <div class="project-info">
-              <h3 class="project-title">Odinbook</h3>
+              <h3 class="project-title">AI Finance Assistant</h3>
               <p class="project-description">
-                A social media platform built with Node.js and PostgreSQL,
-                featuring friend management and user interactions. Odinbook is a
-                social networking application that allows users to connect with
-                others through friend requests and messaging. The platform
-                provides an intuitive way for users to discover new people, send
-                friend requests, and manage their social connections.
+                AI powered web app which helps users stay on top of their
+                finances by tracking income, expenses, and savings in one place.
+                It makes it easier to set financial goals, see progress over
+                time, and spot areas where spending can be trimmed. With helpful
+                insights and suggestions, the app supports smarter day-to-day
+                money decisions without the need for complex spreadsheets or
+                manual tracking.
               </p>
               <div class="tech-stack">
                 <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">EJS</span>
+                <span class="tech-tag">React</span>
                 <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">Express.js</span>
-                <span class="tech-tag">Prisma ORM</span>
                 <span class="tech-tag">PostgreSQL</span>
-                <span class="tech-tag">Bootstrap</span>
-                <span class="tech-tag">Passport.js</span>
-                <span class="tech-tag">Bcrypt</span>
               </div>
               <div class="project-links">
                 <a
-                  href="https://github.com/TKP888/odinbook"
+                  href="https://github.com/yourusername/project"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="github-link"
@@ -315,7 +347,7 @@
               </div>
             </div>
           </div>
-        </section>
+        </section> -->
       </div>
 
       <!-- Work History Timeline Section -->
