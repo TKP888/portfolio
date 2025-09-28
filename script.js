@@ -23,7 +23,7 @@ function preventInitialScroll() {
 
 // Logo click functionality - scroll to top
 function initLogoClick() {
-  const logo = document.querySelector(".site-title");
+  const logo = document.querySelector(".logo-container h2");
   console.log("Logo element found:", logo); // Debug log
 
   if (logo) {
