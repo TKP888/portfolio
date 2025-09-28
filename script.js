@@ -213,10 +213,52 @@ function initScrollAnimations() {
   });
 }
 
+// Carousel functionality
+let currentSlideIndex = 0;
+const slides = document.querySelectorAll(".carousel-image");
+const dots = document.querySelectorAll(".dot");
+
+function showSlide(index) {
+  // Hide all slides
+  slides.forEach((slide) => slide.classList.remove("active"));
+  dots.forEach((dot) => dot.classList.remove("active"));
+
+  // Show current slide
+  if (slides[index]) {
+    slides[index].classList.add("active");
+  }
+  if (dots[index]) {
+    dots[index].classList.add("active");
+  }
+}
+
+function currentSlide(index) {
+  currentSlideIndex = index - 1;
+  showSlide(currentSlideIndex);
+}
+
+function nextSlide() {
+  currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+  showSlide(currentSlideIndex);
+}
+
+function prevSlide() {
+  currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+  showSlide(currentSlideIndex);
+}
+
+// Auto-advance carousel every 3 seconds
+function startCarousel() {
+  setInterval(() => {
+    nextSlide();
+  }, 3000);
+}
+
 // Initialize scroll animations when the page loads
 document.addEventListener("DOMContentLoaded", () => {
   preventInitialScroll(); // Prevent initial scroll snap behavior
   initScrollAnimations();
   addSmoothScrolling(); // Initialize smooth scrolling
   initLogoClick(); // Initialize logo click functionality
+  startCarousel(); // Start carousel auto-advance
 });

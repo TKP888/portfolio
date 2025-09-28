@@ -112,6 +112,15 @@ p {
   gap: 0px;
 }
 
+.logo-container a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-container a:hover {
+  text-decoration: none;
+}
+
 .containerheader {
   display: flex;
   justify-content: space-between;
@@ -431,7 +440,57 @@ nav {
   justify-content: center;
 }
 
-.project-image img {
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 45%;
+  overflow: hidden;
+}
+
+.carousel-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  max-height: 50vh;
+  object-fit: contain;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.carousel-image.active {
+  opacity: 1;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.project-image img:not(.carousel-image) {
   width: 100%;
   height: auto;
   max-height: 80vh;
@@ -1382,7 +1441,7 @@ textarea:focus {
     justify-content: center;
   }
 
-  .project-image img {
+  .project-image img:not(.carousel-image) {
     max-height: 45vh; /* Slightly larger */
     width: 100%;
     object-fit: contain;
