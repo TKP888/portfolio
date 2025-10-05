@@ -19,11 +19,7 @@
       <header class="header">
         <div class="containerheader">
           <div class="logo-container">
-            <!-- <img
-              src="images/Logo.png"
-              alt="Antony Petsas Logo"
-              class="site-title"
-            /> -->
+           
             <a href="index.html"><h2>Antony Petsas</h2></a>
           </div>
           <!-- Desktop Navigation -->
@@ -35,6 +31,14 @@
               <li><a href="#contact">Contact</a></li>
             </ul>
           </nav>
+          <a href="./images/cv/Antony_Petsas_CV_2025-2026.pdf" download="Antony-Petsas-CV.pdf" class="cv-btn-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download CV
+          </a>
 
           <!-- Mobile Menu Toggle -->
           <button class="menu-toggle" aria-label="Open menu">&#9776;</button>
@@ -47,6 +51,7 @@
               <li><a href="#projects">Projects</a></li>
               <li><a href="#timeline">Experience</a></li>
               <li><a href="#contact">Contact</a></li>
+              <li><a href="./images/cv/Antony_Petsas_CV_2025-2026.pdf" download="Antony-Petsas-CV.pdf" class="cv-link-mobile">Download CV</a></li>
             </ul>
           </nav>
         </div>
@@ -63,9 +68,9 @@
           <div class="container">
             <h2>Junior Full Stack Developer</h2>
             <p>
-              Hi, I'm <span class="name-highlight">Antony</span>, a junior full
+              I'm <span class="name-highlight">Antony</span>, a <strong>self-taught</strong> junior full
               stack web developer who enjoys building responsive, user-friendly
-              websites<br />and web applications.
+              websites and web applications using <strong>HTML</strong>, <strong>CSS</strong>, and <strong>JavaScript</strong>.
             </p>
 
             <!-- Uncomment and update path when ready -->
@@ -74,26 +79,13 @@
       </section>
       <section class="intro" id="about">
         <div class="containerintro">
-          <div class="container">
-            <p>
-              I work with HTML, CSS, JavaScript, and modern frameworks to bring
-              ideas to life in the browser.
+          <div class="container" >
+            <p style="text-align: center;">
+              I have <strong>over a decade</strong> of experience in creative media,
+              combining technical expertise with creativity, problem-solving, and collaborative project
+              management to deliver high-quality, user-focused solutions.
             </p>
-
-            <!-- Uncomment and update path when ready -->
-          </div>
-        </div>
-      </section>
-      <section class="intro" id="about">
-        <div class="containerintro">
-          <div class="container">
-            <p>
-              I'm always learning, refining my skills, and focused on writing
-              clean, accessible code that makes for a smooth user experience.
-            </p>
-
-            <!-- Uncomment and update path when ready -->
-          </div>
+           </div>
         </div>
       </section>
 
@@ -365,7 +357,7 @@
                   applications with an emphasis on clean, accessible code,
                   Git/GitHub workflows, and deployment practices.<br />
                   Completed projects include landing pages, dynamic to-do apps,
-                  RESTful APIs, and full-stack CRUD applications.
+                  RESTful APIs, and full stack CRUD applications.
                 </p>
 
                 <div class="timeline-skills">
@@ -379,7 +371,7 @@
                   <span class="skill-tag">Git</span>
                   <span class="skill-tag">GitHub</span>
                   <span class="skill-tag">REST APIs</span>
-                  <span class="skill-tag">Full-Stack Projects</span>
+                  <span class="skill-tag">Full Stack Projects</span>
                 </div>
               </div>
             </div>
@@ -519,6 +511,7 @@
         </div>
       </section>
 
+
       <!-- Contact Section -->
       <section class="contact" id="contact">
         <div class="container">
@@ -561,6 +554,18 @@
                   aria-required="true"
                 />
               </div>
+            </div>
+            <div class="form-group">
+              <label for="subject" id="subject-label">Subject</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="Enter the subject of your message"
+                required
+                aria-labelledby="subject-label"
+                aria-required="true"
+              />
             </div>
             <div class="form-group">
               <label for="message" id="message-label">Message</label>

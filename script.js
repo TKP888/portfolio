@@ -254,6 +254,74 @@ function startCarousel() {
   }, 3000);
 }
 
+// Active navigation highlighting based on scroll position
+function initActiveNavigation() {
+  // Only select sections that have corresponding nav links
+  const sections = document.querySelectorAll(
+    "#about, #projects, #timeline, #contact"
+  );
+  const navLinks = document.querySelectorAll(
+    '.nav-links a[href^="#"], .overlay-links a[href^="#"]'
+  );
+
+  // Function to set active nav link
+  function setActiveLink(sectionId) {
+    // Remove active class from all nav links
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+    });
+
+    // Add active class to corresponding nav link
+    navLinks.forEach((link) => {
+      if (link.getAttribute("href") === `#${sectionId}`) {
+        link.classList.add("active");
+      }
+    });
+  }
+
+  // Set initial active section on page load
+  function setInitialActiveSection() {
+    const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+    let currentSection = null;
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+
+      if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+        currentSection = section;
+      }
+    });
+
+    if (currentSection) {
+      setActiveLink(currentSection.getAttribute("id"));
+    }
+  }
+
+  const observerOptions = {
+    threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5], // Multiple thresholds for better detection
+    rootMargin: "-100px 0px -40% 0px", // Account for fixed header
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      // Only trigger when section is significantly visible
+      if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+        const sectionId = entry.target.getAttribute("id");
+        setActiveLink(sectionId);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all sections
+  sections.forEach((section) => {
+    observer.observe(section);
+  });
+
+  // Set initial active section
+  setInitialActiveSection();
+}
+
 // Initialize scroll animations when the page loads
 document.addEventListener("DOMContentLoaded", () => {
   preventInitialScroll(); // Prevent initial scroll snap behavior
@@ -261,4 +329,5 @@ document.addEventListener("DOMContentLoaded", () => {
   addSmoothScrolling(); // Initialize smooth scrolling
   initLogoClick(); // Initialize logo click functionality
   startCarousel(); // Start carousel auto-advance
+  initActiveNavigation(); // Initialize active nav highlighting
 });
