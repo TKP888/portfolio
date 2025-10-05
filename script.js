@@ -21,23 +21,6 @@ function preventInitialScroll() {
   }
 }
 
-// Logo click functionality - scroll to top
-function initLogoClick() {
-  const logo = document.querySelector(".logo-container h2");
-  console.log("Logo element found:", logo); // Debug log
-
-  if (logo) {
-    logo.addEventListener("click", () => {
-      console.log("Logo clicked!"); // Debug log
-      // Reload the page
-      window.location.reload();
-    });
-    console.log("Logo click event listener added"); // Debug log
-  } else {
-    console.log("Logo element not found"); // Debug log
-  }
-}
-
 toggleButton.addEventListener("click", () => {
   overlayNav.classList.add("active");
 });
@@ -327,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
   preventInitialScroll(); // Prevent initial scroll snap behavior
   initScrollAnimations();
   addSmoothScrolling(); // Initialize smooth scrolling
-  initLogoClick(); // Initialize logo click functionality
+
   startCarousel(); // Start carousel auto-advance
   initActiveNavigation(); // Initialize active nav highlighting
 });

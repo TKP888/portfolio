@@ -34,13 +34,13 @@ body {
   box-sizing: border-box;
   scroll-behavior: smooth;
   scroll-padding-top: 0;
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  /* Hide scrollbar */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .page.wrapper::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none;
 }
 
 /* ========== TYPOGRAPHY ========== */
@@ -88,7 +88,6 @@ p {
   box-sizing: border-box;
 }
 
-/* Reset padding on nested container to avoid alignment issues */
 .containerintro .container {
   padding: 0;
 }
@@ -195,7 +194,6 @@ nav {
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-/* CV Button in Header */
 .cv-btn-header {
   display: inline-flex;
   align-items: center;
@@ -327,8 +325,8 @@ nav {
 
 /* ========== INTRO SECTION ========== */
 .intro {
-  padding: 0; /* Remove padding to prevent shifting */
-  margin-top: 0; /* Remove margin to prevent gaps */
+  padding: 0;
+  margin-top: 0;
   position: relative;
   background-image: url("images/background/2202-0025_RVFX_2110_ShapeGradientLoopBackgrounds_A03A_Neg_Orange_Purple_F001_STILL.webp");
   background-size: cover;
@@ -338,28 +336,25 @@ nav {
   color: var(--color-text);
   text-align: left;
   width: 100%;
-  min-height: 100vh; /* Use min-height to allow content to expand */
-  overflow: visible; /* Allow content to be visible */
+  min-height: 100vh;
+  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
   scroll-snap-align: start;
 }
 
-/* Remove margin from all intro sections except the first one */
 .intro:not(:first-of-type) {
   margin-top: 0;
 }
 
-/* First intro section - no margin, let header overlay */
 .intro:first-of-type {
   margin-top: 0;
-  min-height: 100vh; /* Full viewport height */
-  padding-top: 0; /* Remove padding to align correctly */
-  padding-bottom: 20px; /* Add bottom padding for breathing room */
+  min-height: 100vh;
+  padding-top: 0;
+  padding-bottom: 20px;
 }
 
-/* Add blue overlay with opacity */
 .intro::before {
   content: "";
   position: absolute;
@@ -371,7 +366,6 @@ nav {
   z-index: 1;
 }
 
-/* Ensure content stays above the overlay */
 .intro .containerintro {
   position: relative;
   z-index: 2;
@@ -386,7 +380,7 @@ nav {
   object-fit: cover;
 }
 
-/* Enhanced Scroll Animation Styles for Intro Paragraphs */
+/* Intro Scroll Animation */
 .intro p {
   font-size: 2.2rem;
   line-height: 1.7;
@@ -397,7 +391,6 @@ nav {
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
-/* Name highlight effect on intro hover */
 .intro p .name-highlight {
   position: relative;
   transition: all 0.3s ease;
