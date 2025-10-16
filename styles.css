@@ -23,6 +23,10 @@ body {
   overflow-x: hidden;
   background-color: var(--color-bg-primary);
   color: var(--color-text);
+  overscroll-behavior-y: none; /* Completely prevent over-scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  -webkit-font-smoothing: antialiased; /* Better font rendering on iOS */
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .page.wrapper {
@@ -34,6 +38,7 @@ body {
   box-sizing: border-box;
   scroll-behavior: smooth;
   scroll-padding-top: 0;
+  overscroll-behavior-y: none; /* Completely prevent over-scrolling */
   /* Hide scrollbar */
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -286,7 +291,7 @@ nav {
 }
 
 .overlay-links li a.active {
-  color: var(--color-highlight);
+  color: white;
   font-weight: bold;
   text-decoration: underline;
 }
@@ -485,7 +490,7 @@ nav {
   width: 100%;
   height: 100%;
   padding: 3rem;
-  gap: 3rem;
+  gap: 1rem;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
@@ -723,7 +728,7 @@ nav {
 
 .timeline-item {
   position: relative;
-  margin-bottom: 4rem;
+  /* margin-bottom: 4rem; */
   width: 100%;
   min-height: auto;
   display: flex;
@@ -801,26 +806,35 @@ nav {
 
 .timeline-description {
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.7; /* Increased for better readability */
   color: var(--color-text-secondary);
   margin-bottom: 1.5rem;
+  text-align: justify; /* Justify text for cleaner appearance */
+  hyphens: auto; /* Better word breaking */
+  word-spacing: 0.05em; /* Slightly increased word spacing */
+  text-rendering: optimizeLegibility; /* Better font rendering */
 }
 
 .timeline-skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.6rem; /* Increased gap for better spacing between tags */
+  margin-top: 0.5rem; /* Add some top margin for better separation */
 }
 
 .skill-tag {
   background: rgba(255, 255, 255, 0.15);
   color: var(--color-text);
-  padding: 0.3rem 0.6rem;
+  padding: 0.4rem 0.8rem; /* Increased padding for better touch targets */
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 500;
   transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.02em; /* Better letter spacing */
+  text-rendering: optimizeLegibility; /* Better font rendering */
+  line-height: 1.2; /* Better line height for tags */
+  white-space: nowrap; /* Prevent tag text wrapping */
 }
 
 .skill-tag:hover {
@@ -836,13 +850,14 @@ nav {
   align-items: center;
   justify-content: center;
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  padding: 0;
+  padding: 80px 0 120px 0; /* Extended bottom padding for more background */
   box-sizing: border-box;
   scroll-margin-top: 0;
   position: relative;
   scroll-snap-align: start;
+  background-color: var(--color-bg-primary);
 }
 
 .contact .container {
@@ -854,6 +869,8 @@ nav {
   align-items: center;
   justify-content: center;
   padding: 0 40px;
+  margin-top: 100px;
+  margin-bottom: 100px;
   box-sizing: border-box;
   position: relative;
 }
@@ -983,6 +1000,9 @@ textarea::placeholder {
   width: 100%;
   box-sizing: border-box;
   scroll-snap-align: start;
+  overscroll-behavior-y: contain; /* Prevent over-scrolling past footer */
+  position: relative;
+  z-index: 10; /* Ensure footer appears above intro background */
 }
 
 .footer-flex {
@@ -1010,85 +1030,19 @@ textarea::placeholder {
 }
 
 .foot-icon {
-  height: 24px;
-  width: 24px;
-  transition: transform 0.2s, filter 0.2s;
+  height: 16px;
+  width: 16px;
+  transition: transform 0.2s, opacity 0.2s; /* Changed from filter to opacity */
+  /* Safari-specific fixes */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .foot-icon:hover {
-  transform: scale(1.5);
-  filter: brightness(1.2);
-}
-
-/* ========== TEXTURE OPTIONS ========== */
-/* Apply one of these classes to .intro if needed */
-.texture-noise {
-  background-image: linear-gradient(
-      135deg,
-      rgba(1, 11, 64, 0.95) 0%,
-      rgba(2, 15, 89, 0.85) 50%,
-      rgba(39, 3, 166, 0.75) 100%
-    ),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
-}
-
-.texture-grid {
-  background-image: linear-gradient(
-      135deg,
-      rgba(1, 11, 64, 0.95) 0%,
-      rgba(2, 15, 89, 0.85) 50%,
-      rgba(39, 3, 166, 0.75) 100%
-    ),
-    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M0 0h1v1H0V0zm39 0h1v1h-1V0zM0 39h1v1H0v-1zm39 0h1v1h-1v-1z'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-.texture-dots {
-  background-image: linear-gradient(
-      135deg,
-      rgba(1, 11, 64, 0.95) 0%,
-      rgba(2, 15, 89, 0.85) 50%,
-      rgba(39, 3, 166, 0.75) 100%
-    ),
-    url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='10' cy='10' r='1'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-.texture-lines {
-  background-image: linear-gradient(
-      135deg,
-      rgba(1, 11, 64, 0.95) 0%,
-      rgba(2, 15, 89, 0.85) 50%,
-      rgba(39, 3, 166, 0.75) 100%
-    ),
-    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-
-.texture-hexagons {
-  background-image: linear-gradient(
-      135deg,
-      rgba(1, 11, 64, 0.95) 0%,
-      rgba(2, 15, 89, 0.85) 50%,
-      rgba(39, 3, 166, 0.75) 100%
-    ),
-    url("data:image/svg+xml,%3Csvg width='52' height='60' viewBox='0 0 52 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M26 0l25.98 15v30L26 60 0 45V15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-
-.texture-waves {
-  background-image: linear-gradient(
-      135deg,
-      rgba(1, 11, 64, 0.95) 0%,
-      rgba(2, 15, 89, 0.85) 50%,
-      rgba(39, 3, 166, 0.75) 100%
-    ),
-    url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-.texture-none {
-  background-image: linear-gradient(
-    135deg,
-    rgba(1, 11, 64, 0.95) 0%,
-    rgba(2, 15, 89, 0.85) 50%,
-    rgba(39, 3, 166, 0.75) 100%
-  );
+  transform: scale(1.5) translateZ(0); /* Added hardware acceleration */
+  opacity: 0.8; /* Use opacity instead of filter for Safari compatibility */
 }
 
 /* ========== ACCESSIBILITY ========== */
@@ -1106,8 +1060,8 @@ textarea:focus {
   .nav-links li a,
   .overlay-links li a,
   .foot-icon {
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 16px;
+    min-width: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1128,178 +1082,125 @@ textarea:focus {
     min-height: -webkit-fill-available;
   }
 
-  /* Ensure background works properly on iOS */
-  .intro {
-    background-attachment: scroll;
-  }
-
   /* Fix for iOS Safari viewport height */
   .page.wrapper {
     height: -webkit-fill-available;
+  }
+
+  /* Ensure consistent height across iOS devices */
+  .intro:first-of-type {
+    min-height: -webkit-fill-available;
+  }
+
+  .contact {
+    min-height: -webkit-fill-available;
+  }
+
+  /* iOS-specific button and input fixes */
+  button,
+  input,
+  textarea {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
+
+  /* Fix iOS tap highlight */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* iOS 26+ Specific Optimizations */
+@supports (height: 100dvh) {
+  .intro,
+  .project-card,
+  .contact {
+    min-height: 100dvh; /* Use dynamic viewport height for iOS 26+ */
+  }
+
+  .intro:first-of-type {
+    min-height: 100dvh;
+  }
+
+  .contact {
+    min-height: 100dvh;
+  }
+
+  .page.wrapper {
+    height: 100dvh;
+  }
+}
+
+/* iOS 26+ Safe Area Support */
+@supports (padding: env(safe-area-inset-top)) {
+  .header {
+    padding-top: max(15px, env(safe-area-inset-top));
+  }
+
+  .intro:first-of-type {
+    padding-top: max(0, env(safe-area-inset-top));
+  }
+}
+
+/* Safari-specific icon fixes */
+@supports (-webkit-appearance: none) {
+  .foot-icon {
+    /* Force consistent rendering in Safari */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* Ensure consistent sizing */
+    max-width: none;
+    max-height: none;
+  }
+}
+
+/* Safari Mobile Viewport Fixes - Only for Mobile Safari */
+@supports (-webkit-touch-callout: none) and (max-width: 1023px) {
+  .page.wrapper {
+    height: 100vh;
+    height: -webkit-fill-available; /* Safari mobile viewport fix */
+  }
+
+  .intro {
+    min-height: 100vh;
+    min-height: -webkit-fill-available; /* Safari mobile viewport fix */
+    background-attachment: scroll; /* Fix Safari mobile background issues */
+  }
+
+  .intro:first-of-type {
+    min-height: 100vh;
+    min-height: -webkit-fill-available; /* Safari mobile viewport fix */
+  }
+
+  .project-card {
+    height: 100vh;
+    height: -webkit-fill-available; /* Safari mobile viewport fix */
+  }
+
+  .contact {
+    min-height: 100vh;
+    min-height: -webkit-fill-available; /* Safari mobile viewport fix */
+  }
+
+  /* Fix Safari mobile background positioning */
+  .intro::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(1, 11, 64, 0.7);
+    z-index: 1;
   }
 }
 
 /* ========== RESPONSIVE DESIGN ========== */
 
-/* Large Tablets and Small Desktops (≥1024px and <1280px) */
-@media (max-width: 1279px) {
-  .container,
-  .containerintro,
-  .containerproj,
-  .containerheader,
-  .footer-flex {
-    padding: 0 30px;
-    max-width: 960px;
-  }
-
-  .contact .container {
-    padding: 0 30px;
-    max-width: 960px;
-  }
-
-  #contacttitle {
-    font-size: 3.5rem;
-  }
-
-  .intro {
-    padding: 150px 0;
-  }
-
-  .project-card {
-    padding: 40px 20px;
-  }
-
-  .intro h2 {
-    font-size: 3.5rem;
-  }
-
-  .intro p {
-    font-size: 2.2rem;
-  }
-}
-
-/* Tablets (≥768px and <1024px) */
+/* Mobile and Tablet - Show hamburger menu */
 @media (max-width: 1023px) {
-  .container,
-  .containerintro,
-  .containerproj,
-  .containerheader,
-  .footer-flex {
-    padding: 0 20px;
-    max-width: 720px;
-  }
-
-  .contact .container {
-    padding: 0 20px;
-    max-width: 720px;
-  }
-
-  #contacttitle {
-    font-size: 3rem;
-    line-height: 1.2;
-  }
-
-  .intro {
-    padding: 120px 0;
-    text-align: center;
-  }
-
-  .header {
-    margin: 15px;
-  }
-
-  .site-title {
-    font-size: 1.8rem;
-  }
-
-  /* Keep desktop nav visible on tablets, only hide on mobile */
-  .desktop-nav {
-    display: flex;
-  }
-
-  .menu-toggle {
-    display: none;
-  }
-
-  /* CV button adjustments for tablet */
-  .cv-btn-header {
-    padding: 8px 16px;
-    font-size: 0.95rem;
-    /* margin-left: 15px; */
-  }
-
-  .cv-btn-header svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .button1 {
-    width: 130px;
-    height: 45px;
-    font-size: 16px;
-    margin: 15px;
-  }
-
-  .project-card {
-    padding: 30px 15px;
-  }
-
-  /* Improve form layout on tablets */
-  .form-row {
-    gap: 15px;
-  }
-
-  .form-group {
-    min-width: 200px;
-  }
-
-  #contact-form {
-    padding: 25px;
-    margin: 15px;
-  }
-
-  input,
-  textarea {
-    padding: 10px;
-  }
-
-  .intro h2 {
-    font-size: 3rem;
-    line-height: 1.2;
-  }
-
-  .intro p {
-    font-size: 2rem;
-    line-height: 1.3;
-  }
-
-  /* Project cards responsive */
-  .project-content {
-    flex-direction: column;
-    padding: 1.5rem;
-    gap: 1.5rem;
-  }
-
-  .project-image {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .project-image img {
-    max-height: 50vh;
-  }
-
-  .project-info {
-    padding: 0;
-  }
-
-  .project-title {
-    font-size: 2rem;
-  }
-}
-
-/* Mobile Navigation - Show hamburger menu */
-@media (max-width: 767px) {
   /* Hide desktop nav, show mobile toggle */
   .desktop-nav {
     display: none;
@@ -1313,10 +1214,8 @@ textarea:focus {
   .cv-btn-header {
     display: none;
   }
-}
 
-/* Mobile Devices (<768px) */
-@media (max-width: 767px) {
+  /* Mobile and Tablet Devices (≤1023px) */
   html {
     font-size: 16px; /* Better for mobile readability */
   }
@@ -1393,16 +1292,12 @@ textarea:focus {
     min-height: 48px;
   }
 
-  /* Intro section - optimized for mobile */
+  /* Intro section - optimized for mobile with fixed background workaround */
   .intro {
     padding: 0;
     margin-top: 0;
     position: relative;
-    background-image: url("images/background/2202-0025_RVFX_2110_ShapeGradientLoopBackgrounds_A03A_Neg_Orange_Purple_F001_STILL.webp");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: scroll; /* Better mobile performance */
+    /* Remove background properties - will use pseudo-element instead */
     color: var(--color-text);
     text-align: center; /* Center text on mobile */
     width: 100%;
@@ -1412,6 +1307,21 @@ textarea:focus {
     align-items: center;
     justify-content: center;
     scroll-snap-align: start;
+  }
+
+  /* Fixed background using pseudo-element for mobile */
+  .intro::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("images/background/2202-0025_RVFX_2110_ShapeGradientLoopBackgrounds_A03A_Neg_Orange_Purple_F001_STILL.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 0;
   }
 
   /* Remove margin from all intro sections except the first one */
@@ -1447,16 +1357,16 @@ textarea:focus {
     position: relative;
     z-index: 2;
     flex-direction: column;
-    gap: 35px; /* More spacing */
-    padding: 24px;
+    gap: 30px; /* Better spacing */
+    padding: 20px;
     text-align: center;
-    max-width: 500px; /* Slightly smaller for mobile */
+    max-width: 90%; /* Better width control */
     margin: 0 auto;
   }
 
   .profile {
-    max-width: 180px; /* Slightly smaller for mobile */
-    width: 100%;
+    max-width: 250px; /* Smaller for mobile to fit better */
+    width: auto;
     height: auto;
     margin: 0 auto;
     border-radius: 50%;
@@ -1464,15 +1374,15 @@ textarea:focus {
   }
 
   .intro h2 {
-    font-size: 2.8rem; /* Slightly larger for mobile */
-    line-height: 1.1;
+    font-size: 2.2rem; /* Better size for mobile */
+    line-height: 1.2;
     margin-bottom: 1.5rem;
-    font-weight: 600;
+    /* font-weight: 600; */
   }
 
   .intro p {
-    font-size: 1.5rem; /* Larger for better readability */
-    line-height: 1.5;
+    font-size: 1.4rem; /* Better readability without being too large */
+    line-height: 1.6;
     margin-bottom: 1.2rem;
     opacity: 0;
     transform: translateY(30px);
@@ -1496,74 +1406,97 @@ textarea:focus {
   /* Project cards - optimized mobile layout */
   .project-card {
     width: 100%;
-    padding: 48px 24px; /* More padding */
+    padding: 30px 20px; /* Better padding for mobile */
     height: auto;
     min-height: 100vh;
     max-width: 100%;
+    position: relative;
+    z-index: 10; /* Ensure projects appear above fixed intro background */
   }
 
   .project-content {
     flex-direction: column;
-    padding: 24px;
-    gap: 40px; /* More spacing */
+    padding: 20px;
+    gap: 20px; /* Reduced gap between carousel and project info */
     max-width: 100%;
     height: auto;
   }
 
   .project-image {
+    width: 100%; /* Take full width */
     max-width: 100%;
-    height: auto;
+    height: 45vh; /* Give it a specific height to contain the carousel */
+    min-height: 300px; /* Minimum height to ensure visibility */
     order: 1;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 0 20px; /* Add some padding for better spacing */
+  }
+
+  .carousel-container {
+    width: 100%;
+    height: 40vh; /* Fixed height for mobile */
+    min-height: 250px; /* Ensure minimum height */
+    overflow: hidden;
+    position: relative;
+  }
+
+  .carousel-image {
+    width: 100%;
+    height: 100%; /* Fill the container height */
+    object-fit: contain; /* Maintain aspect ratio while fitting in container */
+    border-radius: 8px;
+  }
+
+  .carousel-dots {
+    display: none; /* Hide dots on mobile */
   }
 
   .project-image img:not(.carousel-image) {
-    max-height: 45vh; /* Slightly larger */
+    max-height: 40vh; /* Better height for mobile */
     width: 100%;
     object-fit: contain;
     border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Add shadow */
   }
 
   .project-info {
     order: 2;
     padding: 0;
-    gap: 24px; /* More spacing */
+    gap: 8px; /* Reduced gap between title and description */
   }
 
   .project-title {
-    font-size: 2.4rem; /* Larger title */
-    margin-bottom: 1.2rem;
+    font-size: 2rem; /* Better size for mobile */
     font-weight: 600;
   }
 
   .project-description {
-    font-size: 1.2rem; /* Larger text */
-    line-height: 1.6;
-    margin-bottom: 1.8rem;
+    font-size: 1.1rem; /* Better readability */
+    line-height: 1.4;
+
     color: var(--color-text-secondary);
   }
 
   .tech-stack {
-    gap: 12px; /* More spacing */
-    margin: 2rem 0;
+    gap: 5px; /* Better spacing */
+    margin: 0.5rem 0;
     justify-content: center;
   }
 
   .tech-tag {
-    font-size: 1rem; /* Larger tags */
-    padding: 10px 18px;
-    border-radius: 25px;
+    font-size: 0.9rem; /* Better size for mobile */
+    padding: 8px 14px;
+    border-radius: 20px;
     font-weight: 500;
     background-color: rgba(39, 3, 166, 0.3); /* Better visibility */
   }
 
   .project-links {
     flex-direction: row;
-    gap: 20px; /* More spacing */
+    gap: 16px; /* Better spacing */
     justify-content: center;
-    margin-top: 24px;
   }
 
   .demo-link {
@@ -1578,104 +1511,139 @@ textarea:focus {
 
   /* Timeline section - optimized mobile layout */
   .timeline-section {
-    padding: 100px 0 80px 0; /* More padding */
+    padding: 80px 0 60px 0; /* Better padding */
+    position: relative;
+    z-index: 10; /* Ensure timeline appears above fixed intro background */
+    scroll-snap-align: start; /* Keep snap alignment but with proximity scrolling */
+    scroll-margin-top: 50px; /* Smaller margin for gentler snapping */
   }
 
   .timeline-title {
-    font-size: 3rem; /* Larger title */
-    margin-bottom: 4rem;
-    padding: 0 24px;
+    font-size: 0.5rem; /* Better size for mobile */
+    margin-top: 20px;
+    margin-bottom: 3rem;
     font-weight: 600;
   }
 
   .timeline {
-    padding: 0 24px;
+    padding: 0 20px;
   }
 
   .timeline::before {
-    left: 24px; /* Align with padding */
+    left: 20px; /* Align with padding */
     transform: none;
     width: 3px; /* Slightly thinner */
   }
 
   .timeline-item {
-    margin-bottom: 4rem; /* More spacing */
+    margin-bottom: 1.5rem; /* Better spacing */
   }
 
   .timeline-item:nth-child(odd) .timeline-content,
   .timeline-item:nth-child(even) .timeline-content {
-    margin-left: 60px; /* More space from timeline */
+    margin-left: 50px; /* Better space from timeline */
     margin-right: 0;
     text-align: left;
   }
 
   .timeline-dot {
-    left: 24px; /* Align with timeline */
+    left: 10px; /* Align with timeline */
     transform: none;
-    width: 18px; /* Slightly larger */
-    height: 18px;
+    width: 16px; /* Better size */
+    height: 16px;
     border: 3px solid var(--color-bg-primary);
   }
 
   .timeline-content {
-    padding: 28px; /* More padding */
+    padding: 20px; /* Better padding for mobile */
     margin: 0;
-    border-radius: 16px; /* More rounded */
+    border-radius: 12px; /* More rounded */
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
   }
 
   .timeline-role {
-    font-size: 1.6rem; /* Larger role title */
-    margin-bottom: 0.8rem;
+    font-size: 1.4rem; /* Better size for mobile */
+    margin-bottom: 0.6rem;
     font-weight: 600;
   }
 
   .timeline-description {
-    font-size: 1.1rem; /* Larger description */
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+    font-size: 1rem; /* Better readability */
+    line-height: 1.7; /* Increased for better mobile readability */
+    margin-bottom: 1.2rem;
     color: var(--color-text-secondary);
+    text-align: left; /* Left align on mobile for better readability */
+    hyphens: auto; /* Better word breaking on mobile */
+    word-spacing: 0.03em; /* Slightly tighter word spacing on mobile */
   }
 
   .skill-tag {
-    font-size: 0.9rem; /* Larger tags */
-    padding: 8px 14px;
-    margin: 3px;
-    border-radius: 20px;
+    font-size: 0.8rem; /* Better size for mobile */
+    padding: 8px 14px; /* Increased padding for better mobile touch targets */
+    margin: 2px;
+    border-radius: 18px; /* Slightly more rounded */
     font-weight: 500;
+    letter-spacing: 0.01em; /* Tighter letter spacing on mobile */
+    line-height: 1.1; /* Tighter line height for mobile */
+    white-space: nowrap; /* Prevent wrapping */
   }
 
-  /* Contact section - optimized mobile layout */
+  /* Contact section - simplified mobile layout */
   .contact {
-    padding: 60px 0; /* More padding */
+    padding: 40px 0; /* Reduced padding for better viewport fit */
     width: 100%;
-    height: auto;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 10;
+    background-color: var(--color-bg-primary);
+  }
+
+  .contact .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Reduced gap between title and form */
+    width: 100%;
+    max-width: 400px;
+    padding: 0 20px;
+    margin: 0 auto;
   }
 
   #contacttitle {
-    font-size: 2.8rem; /* Larger title */
-    line-height: 1.1;
-    margin-bottom: 40px; /* More spacing */
-    padding: 0 24px;
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin: 0; /* Remove margins, let container gap handle spacing */
+    padding: 0;
     font-weight: 600;
+    transition: none; /* Remove title animation for mobile */
+    text-align: center;
   }
 
   #contact-form {
-    margin: 24px;
-    width: calc(100% - 48px);
-    max-width: 520px; /* Slightly larger */
-    padding: 36px 28px; /* More padding */
-    border-radius: 20px; /* More rounded */
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+    margin: 0; /* Remove margins */
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 10px; /* Reduced padding for more compact form */
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Add gap between form elements */
+    opacity: 1; /* Always visible on mobile */
+    visibility: visible;
   }
 
   .form-row {
     flex-direction: column;
-    gap: 24px; /* More spacing */
+    gap: 8px; /* Further reduced gap for compact layout */
     width: 100%;
   }
 
@@ -1683,27 +1651,29 @@ textarea:focus {
     width: 100%;
     min-width: 100%;
     margin: 0;
-    gap: 10px; /* More spacing */
+    gap: 3px; /* Even tighter gap for compact layout */
   }
 
   label {
-    font-size: 1.1rem; /* Larger labels */
+    font-size: 0.85rem; /* Smaller for compact layout */
     font-weight: 600;
     padding: 0;
-    margin-bottom: 8px;
+    margin-bottom: 3px; /* Further reduced margin */
     color: var(--color-text);
+    letter-spacing: 0.01em; /* Better letter spacing */
   }
 
   input,
   textarea {
     width: 100%;
-    padding: 18px; /* Larger padding */
-    font-size: 16px;
+    padding: 12px 10px; /* More compact padding */
+    font-size: 16px; /* Maintain 16px to prevent zoom on iOS */
     margin: 0;
-    border-radius: 12px; /* More rounded */
+    border-radius: 6px; /* Less rounded for compact look */
     border: 2px solid var(--color-accent-1);
-    background-color: rgba(1, 11, 64, 0.3); /* Better contrast */
+    background-color: rgba(1, 11, 64, 0.4); /* Better contrast */
     transition: all 0.3s ease;
+    box-sizing: border-box; /* Ensure proper box sizing */
   }
 
   input:focus,
@@ -1714,21 +1684,23 @@ textarea:focus {
   }
 
   textarea {
-    min-height: 140px; /* Taller textarea */
+    min-height: 80px; /* More compact height */
     resize: vertical;
+    line-height: 1.4; /* Tighter line height */
   }
 
   #sendmessage {
     width: 100%;
-    margin: 24px 0 0 0;
-    padding: 18px; /* Larger padding */
-    font-size: 18px; /* Larger font */
+    margin: 12px 0 0 0; /* Further reduced top margin */
+    padding: 12px 14px; /* More compact padding */
+    font-size: 15px; /* Slightly smaller font */
     font-weight: 600;
-    border-radius: 16px; /* More rounded */
+    border-radius: 6px; /* Less rounded for compact look */
     background-color: var(--color-highlight);
     border: none;
-    box-shadow: 0 4px 16px rgba(39, 3, 166, 0.3);
+    box-shadow: 0 3px 10px rgba(39, 3, 166, 0.3);
     transition: all 0.3s ease;
+    min-height: 44px; /* Minimum touch target */
   }
 
   #sendmessage:hover {
@@ -1746,20 +1718,22 @@ textarea:focus {
 
   /* Footer improvements */
   .footer {
-    padding: 32px 0; /* More padding */
+    padding: 24px 0; /* More padding */
     height: auto;
     min-height: auto;
     background-color: rgba(1, 11, 64, 0.95); /* Enhanced background */
+    position: relative;
+    z-index: 10; /* Ensure footer appears above fixed intro background */
   }
 
   .footer-flex {
-    flex-direction: column;
     gap: 24px; /* More spacing */
     padding: 0 24px;
+    font-size: 0.5rem;
   }
 
   .footer-text {
-    font-size: 1.1rem; /* Larger text */
+    font-size: 0.8rem; /* Larger text */
     font-weight: 500;
   }
 
@@ -1769,22 +1743,38 @@ textarea:focus {
   }
 
   .foot-icon {
-    height: 32px; /* Larger icons */
-    width: 32px;
+    height: 18px; /* Smaller icons for mobile */
+    width: 18px;
     transition: all 0.3s ease;
-    filter: brightness(1.1); /* Slightly brighter */
-  }
-
-  .foot-icon:hover {
-    transform: scale(1.3); /* Larger hover effect */
-    filter: brightness(1.4);
+    /* Safari-specific fixes */
+    -webkit-transform: translateZ(0); /* Force hardware acceleration */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden; /* Fix Safari rendering issues */
+    backface-visibility: hidden;
+    /* Remove filter to prevent Safari sizing issues */
+    opacity: 1;
   }
 
   /* Ensure form is scrollable on mobile if needed */
   #contact-form.visible {
+    opacity: 1;
+    transform: none; /* Override desktop transform for mobile */
+    visibility: visible;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     max-height: 80vh; /* Prevent form from being too tall */
+  }
+
+  /* Hide the show form button on mobile since form is always visible */
+  #show-form {
+    display: none;
+  }
+
+  /* Mobile placeholder styling */
+  input::placeholder,
+  textarea::placeholder {
+    font-size: 16px; /* Larger font size for better mobile readability */
+    color: rgba(255, 255, 255, 0.7); /* Slightly more visible */
   }
 
   /* Additional mobile optimizations */
@@ -1868,6 +1858,7 @@ textarea:focus {
     gap: 25px;
     padding: 15px;
     max-width: 500px;
+    margin-top: 100px;
   }
 
   .profile {
@@ -1897,7 +1888,32 @@ textarea:focus {
 
   .project-content {
     padding: 15px;
-    gap: 25px;
+    gap: 15px; /* Reduced gap for small mobile */
+  }
+
+  .project-image {
+    width: 100%; /* Take full width */
+    height: 40vh; /* Smaller height for small mobile */
+    min-height: 250px; /* Smaller minimum height */
+    padding: 0 15px; /* Smaller padding for small mobile */
+  }
+
+  .carousel-container {
+    height: 35vh; /* Slightly smaller height for small mobile */
+    min-height: 200px; /* Smaller minimum height */
+    margin-bottom: -20px;
+    margin-top: 75px;
+  }
+
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+
+  .carousel-dots {
+    display: none; /* Hide dots on small mobile */
   }
 
   .project-title {
@@ -1925,15 +1941,19 @@ textarea:focus {
   /* Timeline adjustments */
   .timeline-section {
     padding: 60px 0 40px 0;
+    scroll-snap-align: start; /* Keep snap alignment but with proximity scrolling */
+    scroll-margin-top: 40px; /* Smaller margin for gentler snapping on small mobile */
   }
 
   .timeline-title {
-    font-size: 2.4rem;
+    font-size: 2rem;
+    margin-top: 35px;
     margin-bottom: 2.5rem;
   }
 
   .timeline {
     padding: 0 15px;
+    margin-bottom: 120px;
   }
 
   .timeline::before {
@@ -1946,7 +1966,7 @@ textarea:focus {
   }
 
   .timeline-dot {
-    left: 15px;
+    left: -10px;
   }
 
   .timeline-content {
@@ -1958,59 +1978,110 @@ textarea:focus {
   }
 
   .timeline-description {
-    font-size: 0.95rem;
+    font-size: 0.95rem; /* Slightly smaller for small mobile */
+    line-height: 1.6; /* Tighter line height for small screens */
+    text-align: left;
+    hyphens: auto;
+    word-spacing: 0.02em; /* Tighter spacing for small screens */
   }
 
   .skill-tag {
-    font-size: 0.8rem;
-    padding: 5px 10px;
+    font-size: 0.75rem; /* Slightly smaller for small mobile */
+    padding: 6px 10px; /* Smaller padding for small mobile */
+    border-radius: 16px; /* Slightly less rounded for small screens */
+    letter-spacing: 0.005em; /* Minimal letter spacing for small screens */
+    line-height: 1.1;
+    white-space: nowrap;
   }
 
-  /* Contact section adjustments */
+  /* Contact section adjustments - simplified small mobile */
   .contact {
-    padding: 30px 0;
+    padding: 30px 0; /* Reduced padding for better viewport fit */
+  }
+
+  .contact .container {
+    max-width: 350px; /* Smaller for small mobile */
+    gap: 15px; /* Even smaller gap for small mobile */
+    padding: 0 10px;
   }
 
   #contacttitle {
-    font-size: 2.2rem;
-    margin-bottom: 25px;
+    font-size: 1.6rem; /* Slightly smaller for small mobile */
+    margin-top: 95px;
+    margin-bottom: 10px;
+    padding: 0;
+    transition: none; /* Remove title animation for small mobile */
   }
 
   #contact-form {
-    margin: 15px;
-    width: calc(100% - 30px);
-    padding: 25px 15px;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 8px; /* Even more compact padding for small mobile */
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Smaller gap between form elements */
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    opacity: 1; /* Always visible on small mobile */
+    visibility: visible;
+  }
+
+  #contact-form.visible {
+    opacity: 1;
+    transform: none; /* Override desktop transform for small mobile */
+    visibility: visible;
+    margin-bottom: 0;
+  }
+
+  /* Hide the show form button on small mobile since form is always visible */
+  #show-form {
+    display: none;
+  }
+
+  /* Small mobile placeholder styling */
+  input::placeholder,
+  textarea::placeholder {
+    font-size: 12px; /* Maintain larger font size for better mobile readability */
+    color: rgba(255, 255, 255, 0.7); /* Slightly more visible */
   }
 
   .form-row {
-    gap: 15px;
+    gap: 6px; /* Further reduced gap */
   }
 
   .form-group {
-    gap: 6px;
+    gap: 2px; /* Minimal gap */
   }
 
   label {
-    font-size: 0.95rem;
+    font-size: 1rem; /* Smaller label */
+    margin-bottom: 4px;
+    margin-top: 4px;
+    margin-left: 4px;
   }
 
   input,
   textarea {
-    padding: 12px;
-    font-size: 16px;
+    padding: 10px 8px; /* Ultra compact padding */
+    font-size: 16px; /* Maintain 16px to prevent zoom */
   }
 
   textarea {
-    min-height: 100px;
+    min-height: 50px; /* Smaller textarea */
   }
 
   #sendmessage {
-    padding: 12px;
-    font-size: 15px;
+    padding: 10px 12px; /* Ultra compact padding */
+    font-size: 14px; /* Smaller font */
+    min-height: 42px; /* Minimum touch target */
   }
 
   .form-status {
     font-size: 0.9rem;
+    margin: 1px;
   }
 
   /* Footer adjustments */

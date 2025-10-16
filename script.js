@@ -61,8 +61,20 @@ const showFormButton = document.getElementById("show-form");
 const contactForm = document.getElementById("contact-form");
 const formStatus = document.querySelector(".form-status");
 
+// Check if device is mobile
+function isMobile() {
+  return window.innerWidth <= 1023;
+}
+
 function showForm() {
-  // First animate the title
+  // For mobile, just scroll to contact section since form is always visible
+  if (isMobile()) {
+    const contactSection = document.querySelector(".contact");
+    contactSection.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+
+  // Desktop behavior - animate title and show form
   const contactTitle = document.getElementById("contacttitle");
   contactTitle.classList.add("animate-up");
 
@@ -83,7 +95,12 @@ function showForm() {
 }
 
 function hideForm() {
-  // Hide the form with animation
+  // For mobile, don't hide the form since it should always be visible
+  if (isMobile()) {
+    return;
+  }
+
+  // Desktop behavior - hide the form with animation
   contactForm.classList.remove("visible");
 
   // After form animation completes, restore the title and show the button
@@ -139,8 +156,16 @@ contactForm.addEventListener("submit", async (e) => {
         "Message sent successfully! I'll get back to you soon.";
       formStatus.style.color = "#4CAF50";
       contactForm.reset();
-      // Hide form after successful submission
-      setTimeout(hideForm, 2000);
+
+      // Clear status message after 3 seconds on mobile, or hide form after 2 seconds on desktop
+      if (isMobile()) {
+        setTimeout(() => {
+          formStatus.textContent = "";
+          formStatus.style.color = "";
+        }, 3000);
+      } else {
+        setTimeout(hideForm, 2000);
+      }
     } else {
       throw new Error("Failed to send message");
     }
@@ -148,6 +173,14 @@ contactForm.addEventListener("submit", async (e) => {
     formStatus.textContent =
       "Sorry, there was a problem sending your message. Please try again.";
     formStatus.style.color = "#f44336";
+
+    // Clear error message after 3 seconds on mobile
+    if (isMobile()) {
+      setTimeout(() => {
+        formStatus.textContent = "";
+        formStatus.style.color = "";
+      }, 3000);
+    }
   } finally {
     submitButton.disabled = false;
     submitButton.textContent = "Send Message";
@@ -311,6 +344,27 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollAnimations();
   addSmoothScrolling(); // Initialize smooth scrolling
 
+  // Initialize contact form for mobile
+  if (isMobile()) {
+    contactForm.style.display = "flex";
+    contactForm.classList.add("visible");
+  }
+
   startCarousel(); // Start carousel auto-advance
   initActiveNavigation(); // Initialize active nav highlighting
+
+  // Handle window resize to adjust form visibility
+  window.addEventListener("resize", () => {
+    if (isMobile()) {
+      contactForm.style.display = "flex";
+      contactForm.classList.add("visible");
+    } else {
+      // Reset to desktop behavior
+      contactForm.style.display = "";
+      contactForm.classList.remove("visible");
+      const contactTitle = document.getElementById("contacttitle");
+      contactTitle.classList.remove("animate-up");
+      showFormButton.classList.remove("hidden");
+    }
+  });
 });
