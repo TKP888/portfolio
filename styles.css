@@ -1113,6 +1113,10 @@ textarea:focus {
 
 /* iOS 26+ Specific Optimizations */
 @supports (height: 100dvh) {
+  .page.wrapper {
+    height: 100dvh; /* Use dynamic viewport height for iOS 26+ */
+  }
+
   .intro,
   .project-card,
   .contact {
@@ -1127,8 +1131,11 @@ textarea:focus {
     min-height: 100dvh;
   }
 
-  .page.wrapper {
+  /* Additional iOS 26+ fixes */
+  html,
+  body {
     height: 100dvh;
+    min-height: 100dvh;
   }
 }
 
@@ -1140,6 +1147,34 @@ textarea:focus {
 
   .intro:first-of-type {
     padding-top: max(0, env(safe-area-inset-top));
+  }
+}
+
+/* iOS 26+ Enhanced Viewport Fixes */
+@supports (height: 100dvh) and (-webkit-touch-callout: none) {
+  /* Specific fixes for iOS 26 Safari */
+  html {
+    height: 100dvh;
+    height: -webkit-fill-available;
+  }
+
+  body {
+    height: 100dvh;
+    height: -webkit-fill-available;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+  }
+
+  .page.wrapper {
+    height: 100dvh;
+    height: -webkit-fill-available;
+  }
+
+  .intro,
+  .project-card,
+  .contact {
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
   }
 }
 
@@ -1157,32 +1192,51 @@ textarea:focus {
   }
 }
 
-/* Safari Mobile Viewport Fixes - Only for Mobile Safari */
+/* Safari Mobile Viewport Fixes - Enhanced for iOS 26 */
 @supports (-webkit-touch-callout: none) and (max-width: 1023px) {
+  /* Enhanced viewport fixes for iOS 26 Safari */
+  html,
+  body {
+    height: 100vh;
+    height: -webkit-fill-available;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+
   .page.wrapper {
     height: 100vh;
     height: -webkit-fill-available; /* Safari mobile viewport fix */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
   }
 
   .intro {
     min-height: 100vh;
     min-height: -webkit-fill-available; /* Safari mobile viewport fix */
+    height: 100vh;
+    height: -webkit-fill-available;
     background-attachment: scroll; /* Fix Safari mobile background issues */
   }
 
   .intro:first-of-type {
     min-height: 100vh;
     min-height: -webkit-fill-available; /* Safari mobile viewport fix */
+    height: 100vh;
+    height: -webkit-fill-available;
   }
 
   .project-card {
     height: 100vh;
     height: -webkit-fill-available; /* Safari mobile viewport fix */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
   }
 
   .contact {
     min-height: 100vh;
     min-height: -webkit-fill-available; /* Safari mobile viewport fix */
+    height: 100vh;
+    height: -webkit-fill-available;
   }
 
   /* Fix Safari mobile background positioning */
@@ -1194,6 +1248,22 @@ textarea:focus {
     bottom: 0;
     background-color: rgba(1, 11, 64, 0.7);
     z-index: 1;
+  }
+
+  /* Additional iOS 26 Safari fixes */
+  .timeline-section {
+    min-height: auto; /* Prevent timeline from forcing viewport height */
+  }
+
+  /* Ensure footer doesn't cause viewport issues */
+  .footer {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Fix any potential scroll issues */
+  * {
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -1858,7 +1928,7 @@ textarea:focus {
     gap: 25px;
     padding: 15px;
     max-width: 500px;
-    margin-top: 100px;
+    margin-top: 0;
   }
 
   .profile {
@@ -1901,8 +1971,8 @@ textarea:focus {
   .carousel-container {
     height: 35vh; /* Slightly smaller height for small mobile */
     min-height: 200px; /* Smaller minimum height */
-    margin-bottom: -20px;
-    margin-top: 75px;
+    margin-bottom: -10px;
+    margin-top: 0;
   }
 
   .carousel-image {
@@ -1947,7 +2017,7 @@ textarea:focus {
 
   .timeline-title {
     font-size: 2rem;
-    margin-top: 35px;
+    margin-top: 0;
     margin-bottom: 2.5rem;
   }
 
@@ -2007,7 +2077,7 @@ textarea:focus {
 
   #contacttitle {
     font-size: 1.6rem; /* Slightly smaller for small mobile */
-    margin-top: 95px;
+    margin-top: 15px;
     margin-bottom: 10px;
     padding: 0;
     transition: none; /* Remove title animation for small mobile */
